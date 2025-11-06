@@ -18,13 +18,13 @@ const Portfolio = () => {
   const portfolio = [
     { id: 1, category: 'wedding', title: 'Wedding Photoshoot', description: 'Elegant ceremony capturing timeless moments', image: '/wedd-img/wedd11.jpg' },
     { id: 2, category: 'portrait', title: 'Portrait Shoot', description: 'Professional headshot for corporate branding', image: '/pot-img/pot2.jpg' },
-    { id: 3, category: 'commercial', title: 'Product Photography', description: 'High-end product showcase for luxury brand', image: '/product-img.jpeg' },
+    //{ id: 3, category: 'commercial', title: 'Product Photography', description: 'High-end product showcase for luxury brand', image: '/product-img.jpeg' },
     { id: 4, category: 'Pre-Wedding', title: 'Pre-Wedding Shoot', description: 'Bold fashion editorial for magazine spread', image: '/pre-wedd/pre-wedd4.jpeg' },
-    { id: 5, category: 'events', title: 'Event Shoot', description: 'Annual gala with celebrity guests', image: '/event-img/event2.jpg' },
+    { id: 5, category: 'events', title: 'Event Shoot', description: 'Annual gala with celebrity guests', image: '/event-img/event1.jpg' },
     { id: 6, category: 'portrait', title: 'Outdoor Shoot', description: 'Warm family moments in natural setting', image: '/out-img/out7.jpeg' },
-    { id: 7, category: 'wedding', title: 'Maternity Shoot', description: 'Breathtaking beachside celebration', image: '/maternity-img/maternity3.jpeg' },
-    { id: 8, category: 'baby', title: 'Baby Photography', description: 'Culinary artistry and ambiance captured', image: '/baby-img/baby1.jpeg' },
-    { id: 9, category: 'candid', title: 'Candid Photography', description: 'High fashion runway documentation', image: '/candid-img/candid1.jpg' },
+   // { id: 7, category: 'wedding', title: 'Maternity Shoot', description: 'Breathtaking beachside celebration', image: '/maternity-img/maternity3.jpeg' },
+    { id: 8, category: 'baby', title: 'Baby Photography', description: 'Culinary artistry and ambiance captured', image: '/baby-img/baby1.jpg' },
+    //{ id: 9, category: 'candid', title: 'Candid Photography', description: 'High fashion runway documentation', image: '/candid-img/candid1.jpg' },
   ];
 
   const filteredPortfolio =
@@ -33,7 +33,7 @@ const Portfolio = () => {
       : portfolio.filter((item) => item.category === selectedCategory);
 
   return (
-    <section className="py-20 sm:py-28 bg-white relative overflow-hidden" id="portfolio">
+    <section className="py-8 sm:py-18 bg-white relative overflow-hidden" id="portfolio">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div

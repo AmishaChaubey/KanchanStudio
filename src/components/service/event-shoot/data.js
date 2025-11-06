@@ -8,7 +8,7 @@ export const galleryItems = [
   },
   { 
     id: 2, 
-    image: "/event-img/event2.jpg", 
+    image: "/event-img/event2.jpeg", 
     title: "Event shoot", 
     category: "portrait",
     size: "small"
@@ -57,7 +57,7 @@ export const galleryItems = [
   },
   { 
     id: 9, 
-    image: "/event-img/event9.jpg", 
+    image: "/event-img/event9.jpeg", 
     title: "Event shoot", 
     category: "portrait",
     size: "small"
@@ -71,7 +71,7 @@ export const galleryItems = [
   },
   { 
     id: 11, 
-    image: "/event-img/event11.jpg", 
+    image: "/event-img/event11.jpeg", 
     title: "Event shoot", 
     category: "portrait",
     size: "small"

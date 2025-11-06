@@ -1,14 +1,14 @@
 export const galleryItems = [
   { 
     id: 1, 
-    image: "/baby-img/baby1.jpeg", 
+    image: "/baby-img/baby1.jpg", 
     title: "Baby shoot", 
     category: "portrait",
     size: "large"
   },
   { 
     id: 2, 
-    image: "/baby-img/baby2.jpeg", 
+    image: "/baby-img/baby2.jpg", 
     title: "Baby shoot", 
     category: "portrait",
     size: "small"
@@ -36,28 +36,28 @@ export const galleryItems = [
   },
   { 
     id: 6, 
-    image: "/baby-img/baby6.jpeg", 
+    image: "/baby-img/baby6.jpg", 
     title: "Baby shoot", 
     category: "fashion",
     size: "large"
   },
   { 
     id: 7, 
-    image: "/baby-img/baby7.jpeg", 
+    image: "/baby-img/baby7.jpg", 
     title: "Baby shoot", 
     category: "portrait",
     size: "small"
   },
   { 
     id: 8, 
-    image: "/baby-img/baby8.jpeg", 
+    image: "/baby-img/baby8.jpg", 
     title: "Baby shoot", 
     category: "fashion",
     size: "medium"
   },
   { 
     id: 9, 
-    image: "/baby-img/baby9.jpeg", 
+    image: "/baby-img/baby9.jpg", 
     title: "Baby shoot", 
     category: "portrait",
     size: "small"
@@ -71,7 +71,7 @@ export const galleryItems = [
   },
   { 
     id: 11, 
-    image: "/baby-img/baby11.jpeg", 
+    image: "/baby-img/baby11.jpg", 
     title: "Baby shoot", 
     category: "portrait",
     size: "small"

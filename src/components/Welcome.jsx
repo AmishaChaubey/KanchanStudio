@@ -3,6 +3,7 @@ import { Camera, Sparkles, Award } from 'lucide-react';
 import { Link } from "react-router-dom";
 
 const Welcome = () => {
+    window.scrollTo(0, 0);
   return (
     <section className="py-24 bg-white relative overflow-hidden" id="about">
       {/* Decorative elements */}

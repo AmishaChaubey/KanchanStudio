@@ -33,11 +33,20 @@ import PhotoFraming from "./components/service/photo-framing/photoFraming";
 import WeddingCinemo from "./components/service/wedding-cinemo/wedding-cinemo";
 import Portrait from "./components/service/Portrait-shoot/Portrait";
 
+import PvcCard from './components/service/pvc-card/PvcCard';
+import Printout from './components/service/printout/Printout';
+import VisaPassport from './components/service/visa-passport/VisaPhoto';
+import Birthday from './components/service/birthday-shoot/Birthday'
+
 // Gallery Component
 import PhotoStudioWebsite from "./components/gallery/Gallery";
-import PrivacyPolicy from "./components/privacyPolicy/PrivacyPolicy";
+
 import VisualDiaryGallery from "./components/Gallery";
 
+
+
+//Video Component
+import VideoSections from "./components/videos/VideoSection";
 const App = () => {
   return (
     <Router>
@@ -66,9 +75,10 @@ const App = () => {
         <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/contact" element={<ContactPage />} />
                 <Route path="/gallery" element={<PhotoStudioWebsite />} />
+                {/* <Route path="/terms-and-conditions" element={<TermsAndConditions/>}/> */}
+                <Route path="/videos" element={<VideoSections/>}/>
 
-        <Route path="/privacy-polcy" element={<PrivacyPolicy />} />
-
+        {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> */}
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/baby-shoot" element={<BabyShoot />} />
         <Route path="/services/wedding-photography" element={<WeddingPhotography />} />
@@ -80,6 +90,10 @@ const App = () => {
         <Route path="/services/portrait-shoot" element={<Portrait />} />
         <Route path="/services/photo-framing" element={<PhotoFraming />} />
         <Route path="/services/wedding-cinemo" element={<WeddingCinemo />} />
+         <Route path="/services/pvc-cards" element={<PvcCard/>} />
+            <Route path="/services/photo-printing" element={<Printout/>} />
+                        <Route path="/services/visa-passport" element={<VisaPassport/>} />
+                           <Route path="/services/birthday" element={<Birthday/>} />
       </Routes>
 
       <Footer />

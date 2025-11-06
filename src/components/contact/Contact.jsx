@@ -68,7 +68,7 @@ export default function ContactPage() {
     {
       question: "How long does it take to get edited photos?",
       answer:
-        "Usually, you’ll receive your edited photos within 5–7 working days. We also offer express delivery options on request.",
+        "Usually, you'll receive your edited photos within 5–7 working days. We also offer express delivery options on request.",
     },
     {
       question: "Can I get raw photos too?",
@@ -87,7 +87,7 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Thank you for reaching out! We’ll get back to you soon.");
+    alert("Thank you for reaching out! We'll get back to you soon.");
     setFormData({
       name: "",
       email: "",
@@ -111,10 +111,10 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="relative text-center z-10 max-w-6xl px-6">
           <h1 className="text-5xl md:text-6xl font-bold mb-4 font-serif text-white">
-            Let’s Create Magic Together
+            Let's Create Magic Together
           </h1>
           <p className="text-lg text-white/90">
-            Have a photoshoot idea in mind? Reach out and let’s make it happen.
+            Have a photoshoot idea in mind? Reach out and let's make it happen.
           </p>
         </div>
         <style>{`
@@ -144,7 +144,7 @@ export default function ContactPage() {
           <span className="absolute left-0 bottom-0 h-0 w-[2px] bg-[#C8252C] group-hover:h-full transition-all duration-500"></span>
 
           <div className="relative flex flex-col items-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#C8252C] rounded-xl mb-5">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-red-900 rounded-xl mb-5">
               <Icon className="w-8 h-8 text-white" />
             </div>
             <h3 className="font-bold text-red-900 text-lg mb-2">{info.title}</h3>
@@ -236,11 +236,11 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* FAQ Section */}
-      <div className="max-w-7xl mx-auto px-6 py-16 sm:py-20">
-        <div className="text-center mb-16">
+      {/* FAQ Section - UPDATED DESIGN */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+        <div className="text-center mb-12 sm:mb-16">
           <h2
-            className="text-4xl md:text-5xl font-bold mb-4 text-black"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-black px-4"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Frequently Asked{" "}
@@ -248,23 +248,63 @@ export default function ContactPage() {
               className="text-transparent bg-red-900 bg-clip-text"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              question
+              Questions
             </span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-amber-700 to-transparent mx-auto mb-6 rounded-full"></div>
+          <p className="text-gray-600 max-w-2xl mx-auto px-4 text-sm sm:text-base">
+            Everything you need to know about our photography services
+          </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white border border-red-900 rounded-2xl shadow-lg overflow-hidden">
-              <button
-                className="w-full p-4 flex justify-between items-center text-left"
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
-              >
-                <h3 className="font-semibold text-red-900">{faq.question}</h3>
-                <ChevronDown className={`w-5 h-5 text-red-900 transition-transform ${openFaq === index ? "rotate-180" : ""}`} />
-              </button>
-              <div className={`px-4 pb-4 text-gray-700 transition-all duration-300 ${openFaq === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}>
-                {faq.answer}
+            <div 
+              key={index} 
+              className="relative group bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-red-900/10"
+            >
+              {/* Animated gradient border */}
+              <div className="absolute inset-0 bg-gradient-to-r from-red-900 via-amber-700 to-red-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-[2px] bg-white rounded-2xl"></div>
+              
+              {/* Content */}
+              <div className="relative">
+                <button
+                  className="w-full p-5 sm:p-6 flex justify-between items-start gap-4 text-left group/btn"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                >
+                  <div className="flex-1">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <span className="flex-shrink-0 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-red-900 text-white rounded-full font-bold text-sm sm:text-base transition-transform duration-300 group-hover/btn:scale-110">
+                        {index + 1}
+                      </span>
+                      <h3 className="font-bold text-red-900 text-base sm:text-lg leading-snug pt-1">
+                        {faq.question}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-red-900/10 rounded-full transition-all duration-300 group-hover/btn:bg-red-900 group-hover/btn:rotate-180">
+                    <ChevronDown 
+                      className={`w-5 h-5 text-red-900 transition-all duration-300 group-hover/btn:text-white ${
+                        openFaq === index ? "rotate-180" : ""
+                      }`} 
+                    />
+                  </div>
+                </button>
+                
+                <div 
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                    openFaq === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="px-5 sm:px-6 pb-5 sm:pb-6">
+                    <div className="pl-12 sm:pl-14 pr-2 sm:pr-4">
+                      <div className="w-full h-[1px] bg-gradient-to-r from-red-900/20 via-amber-700/20 to-transparent mb-4"></div>
+                      <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

@@ -8,7 +8,7 @@ export const galleryItems = [
   },
   { 
     id: 2, 
-    image: "/pre-wedd/pre-wedd2.jpeg", 
+    image: "/pre-wedd/pre-wedd14.jpg", 
     title: "Pre-Wedding shoot", 
     category: "portrait",
     size: "small"
@@ -57,7 +57,7 @@ export const galleryItems = [
   },
   { 
     id: 9, 
-    image: "/pre-wedd/pre-wedd9.jpeg", 
+    image: "/pre-wedd/pre-wedd13.jpg", 
     title: "Pre-Wedding shoot", 
     category: "portrait",
     size: "small"

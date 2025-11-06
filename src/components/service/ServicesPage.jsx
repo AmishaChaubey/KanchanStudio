@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function PhotoStudioGallery() {
   const [selectedService, setSelectedService] = useState(null);
+  const [activeCard, setActiveCard] = useState(null);
 
   const services = [
     {
@@ -115,10 +116,10 @@ export default function PhotoStudioGallery() {
         <div className="max-w-7xl px-2 sm:px-6 mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service) => (
-              <Link
+              <div
                 key={service.id}
-                to={service.link}
                 className="group cursor-pointer block"
+                onClick={() => setActiveCard(activeCard === service.id ? null : service.id)}
               >
                 <div className="relative aspect-[3/4] overflow-hidden bg-white rounded-2xl shadow-md group-hover:shadow-2xl transition-all duration-500">
                   <img
@@ -131,22 +132,26 @@ export default function PhotoStudioGallery() {
                     alt={service.name}
                     className="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:opacity-100 scale-110 group-hover:scale-100"
                   />
-                  <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-90 transition-all duration-500 flex flex-col items-center justify-center p-6 text-center">
-                    <div className="mb-6 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                  <div className={`absolute inset-0 bg-black/80 ${activeCard === service.id ? 'opacity-90' : 'opacity-0'} lg:group-hover:opacity-90 transition-all duration-500 flex flex-col items-center justify-center p-6 text-center`}>
+                    <div className={`mb-6 transform ${activeCard === service.id ? 'translate-y-0' : 'translate-y-4'} lg:group-hover:translate-y-0 transition-all duration-500 delay-100`}>
                       <p className="text-white text-lg font-semibold">View {service.imageCount} Photos</p>
                     </div>
-                    <h3 className="text-white text-xl sm:text-2xl font-black mb-6 tracking-tight transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-200">
+                    <h3 className={`text-white text-xl sm:text-2xl font-black mb-6 tracking-tight transform ${activeCard === service.id ? 'translate-y-0' : 'translate-y-4'} lg:group-hover:translate-y-0 transition-all duration-500 delay-200`}>
                       {service.name}
                     </h3>
-                    <button 
-                      onClick={(e) => e.preventDefault()}
-                      className="bg-white text-black px-8 py-3 font-bold uppercase tracking-wider rounded-lg transition-all text-sm hover:bg-gray-100 active:scale-95 transform translate-y-4 group-hover:translate-y-0 duration-500 delay-300"
+                    <Link
+                      to={service.link}
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      View More →
-                    </button>
+                      <button 
+                        className={`bg-white text-black px-8 py-3 font-bold uppercase tracking-wider rounded-lg transition-all text-sm hover:bg-gray-100 active:scale-95 transform ${activeCard === service.id ? 'translate-y-0' : 'translate-y-4'} lg:group-hover:translate-y-0 duration-500 delay-300`}
+                      >
+                        View More →
+                      </button>
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>

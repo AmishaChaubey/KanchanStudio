@@ -5,14 +5,7 @@ import { galleryItems, bannerConfig, breadcrumbItems } from './data';
 const PhotographyGallery = () => {
   const [offsetY, setOffsetY] = useState(0);
 
-  const handleScroll = () => {
-    setOffsetY(window.scrollY * 0.5); // Parallax speed
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+ 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50">

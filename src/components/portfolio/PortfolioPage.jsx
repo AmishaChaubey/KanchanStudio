@@ -90,9 +90,9 @@ const PortfolioPage = () => {
       </div>
 
       {/* Portfolio Section */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container px-4 py-16">
         {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-7xl">
           {portfolioItems.map((item) => (
             <div
               key={item.id}
