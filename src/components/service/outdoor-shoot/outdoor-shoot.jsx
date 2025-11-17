@@ -34,6 +34,14 @@ const PhotographyGallery = () => {
 
         {/* Banner Text */}
         <div className="relative z-10 flex flex-col justify-center items-center text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+          
+          {bannerConfig.badge && (
+                                              <div className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                                                <span className="text-white text-xs sm:text-sm font-light tracking-widest uppercase">
+                                                  {bannerConfig.badge}
+                                                </span>
+                                              </div>
+                                            )}  
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 tracking-wide leading-tight text-white">
             {bannerConfig.title}
           </h1>

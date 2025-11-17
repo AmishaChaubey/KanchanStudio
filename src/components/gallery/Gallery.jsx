@@ -51,7 +51,7 @@ const PhotoStudioWebsite = () => {
       coverImage: "product-img/product1.jpg",
       images: [
         "product-img/product2.jpg",
-        "product-img/product4.jpg",
+        "product-img/product4.jpeg",
         "product-img/product5.jpg",
         "product-img/product6.jpg",
         "product-img/product7.jpg",
@@ -61,9 +61,9 @@ const PhotoStudioWebsite = () => {
     {
       id: 5,
       title: "Event Photography",
-      coverImage: "/event-img/event2.jpg",
+      coverImage: "/event-img/event2.jpeg",
       images: [
-        "/event-img/event2.jpg",
+        "/event-img/event2.jpeg",
         "/event-img/event3.jpg",
         "/event-img/event4.jpg",
         "/event-img/event5.jpg",
@@ -82,6 +82,45 @@ const PhotoStudioWebsite = () => {
         "/candid-img/candid5.jpg",
         "/candid-img/candid6.jpg",
         "/candid-img/candid7.jpg",
+      ],
+    },
+      {
+      id: 7,
+      title: "Photo Printing",
+      coverImage: "/printout-img/printout1.jpg",
+      images: [
+        "/printout-img/printout2.jpg",
+        "/printout-img/printout3.jpg",
+        "/printout-img/printout4.jpg",
+        "/printout-img/printout5.jpg",
+        "/printout-img/printout7.jpg",
+        "/printout-img/printout8.jpg",
+      ],
+    },
+      {
+      id: 8,
+      title: "PVC Cards",
+      coverImage: "/pvc-img/pvc1.jpg",
+      images: [
+        "/pvc-img/pvc2.jpg",
+        "/pvc-img/pvc3.jpg",
+        "/pvc-img/pvc4.jpg",
+        "/pvc-img/pvc5.jpg",
+        "/pvc-img/pvc6.jpg",
+        "/pvc-img/pvc7.jpg",
+      ],
+    },
+      {
+      id: 9,
+      title: "Visa Passport",
+      coverImage: "/visa-passport/visa1.jpg",
+      images: [
+        "/visa-passport/visa2.jpg",
+        "/visa-passport/visa3.jpg",
+        "/visa-passport/visa4.jpg",
+        "/visa-passport/visa5.jpg",
+        "/visa-passport/visa6.jpg",
+        "/visa-passport/passport.jpg",
       ],
     },
   ];

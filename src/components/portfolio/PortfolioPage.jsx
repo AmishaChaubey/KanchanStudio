@@ -24,7 +24,7 @@ const PortfolioPage = () => {
     },
     {
       id: 4,
-      title: "Corporate Event",
+      title: "Event Photography" ,
       description: "Annual gala with celebrity guests",
       imageUrl: "/event-img/event3.jpg",
     },
@@ -32,7 +32,7 @@ const PortfolioPage = () => {
       id: 5,
       title: "Baby Photography",
       description: "Culinary artistry and ambiance captured",
-      imageUrl: "/baby-img/baby4.jpeg",
+      imageUrl: "/baby-img/baby4.jpg",
     },
     {
       id: 6,

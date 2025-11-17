@@ -9,7 +9,7 @@ import {
   Phone,
   MessageSquare,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,6 +18,7 @@ const Navbar = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const timeoutRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -53,6 +54,18 @@ const Navbar = () => {
       window.removeEventListener("keydown", handleEsc);
     };
   }, []);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isBookingModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isBookingModalOpen]);
 
   const handleServicesMouseEnter = () => {
     if (timeoutRef.current) {
@@ -91,6 +104,13 @@ const Navbar = () => {
     });
   };
 
+  const isActive = (path) => {
+    if (path === "/services") {
+      return location.pathname.startsWith("/services");
+    }
+    return location.pathname === path;
+  };
+
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -103,24 +123,54 @@ const Navbar = () => {
   ];
 
   const serviceItems = [
+       { name: "Photo Framing", path: "/services/photo-framing" },
+      { name: "Photo Printing", path: "/services/photo-printing" },
+     { name: "Indoor Shoot", path: "/services/indoor-shoot" },
+      { name: "Outdoor Shoot", path: "/services/outdoor-photography" },
     { name: "PVC Cards", path: "/services/pvc-cards" },
     { name: "Baby Shoot", path: "/services/baby-shoot" },
     { name: "Birthday Shoot", path: "/services/birthday" },
-    { name: "Photo Framing", path: "/services/photo-framing" },
-    { name: "Photo Printing", path: "/services/photo-printing" },
+ 
+  
     { name: "Visa-Passport", path: "/services/visa-passport" },
-    { name: "Event Photography", path: "/services/event-photography" },
-    { name: "Portrait Photography", path: "/services/portrait-shoot" },
-    { name: "Product Photography", path: "/services/product-photography" },
-    { name: "Maternity Photoshoot", path: "/services/maternity-shoot" },
-    { name: "Outdoor Photography", path: "/services/outdoor-photography" },
-    { name: "Wedding Photography", path: "/services/wedding-photography" },
-    { name: "Pre-Wedding Photoshoot", path: "/services/prewedding-shoot" },
+    { name: "Event Shoot", path: "/services/event-photography" },
+    { name: "Portrait Shoot", path: "/services/portrait-shoot" },
+    { name: "Product Shoot", path: "/services/product-photography" },
+    { name: "Maternity Shoot", path: "/services/maternity-shoot" },
+   
+    { name: "Wedding Shoot", path: "/services/wedding-photography" },
+    { name: "Pre-Wedding Shoot", path: "/services/prewedding-shoot" },
     { name: "Wedding Cinematography", path: "/services/wedding-cinemo" },
   ];
 
   return (
     <>
+      <style>{`
+        @keyframes slideDown {
+          from {
+            width: 0%;
+          }
+          to {
+            width: 100%;
+          }
+        }
+        
+        .active-link::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          background: linear-gradient(90deg, #7f1d1d, #991b1b, #7f1d1d);
+          animation: slideDown 0.3s ease-in-out;
+        }
+        
+        .nav-link-wrapper {
+          position: relative;
+        }
+      `}</style>
+
       <nav
         className={`fixed w-full z-50 transition-all duration-300 ${
           isScrolled ? "bg-white shadow-lg" : "bg-transparent"
@@ -131,9 +181,9 @@ const Navbar = () => {
             <Link to="/" className="flex-shrink-0">
               <div className="flex items-center gap-3">
                 <img
-                  src="/logo.svg"
+                  src="/kn-logo.svg"
                   alt="Logo"
-                  className="h-10 w-24 sm:h-12 sm:w-28 md:h-13 md:w-30 object-contain"
+                  className="h-40 w-54 sm:h-42 sm:w-58 md:h-43 md:w-60 object-contain"
                 />
               </div>
             </Link>
@@ -141,28 +191,33 @@ const Navbar = () => {
             {/* Desktop Links */}
             <div className="hidden min-[769px]:flex lg:gap-8 md:gap-4 text-sm font-medium items-center lg:space-x-2 md:space-x-1 ml-4 lg:ml-8">
               {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`transition-colors duration-300 tracking-widest uppercase ${
-                    isScrolled
-                      ? "text-black hover:text-red-900"
-                      : "text-white hover:text-gray-300"
-                  }`}
-                >
-                  {link.name}
-                </Link>
+                <div key={link.name} className="nav-link-wrapper">
+                  <Link
+                    to={link.path}
+                    className={`transition-colors duration-300 tracking-widest uppercase ${
+                      isActive(link.path) ? "active-link" : ""
+                    } ${
+                      isScrolled
+                        ? "text-black hover:text-red-900"
+                        : "text-white hover:text-gray-300"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </div>
               ))}
 
               {/* Services Dropdown */}
               <div
-                className="relative"
+                className="relative nav-link-wrapper"
                 onMouseEnter={handleServicesMouseEnter}
                 onMouseLeave={handleServicesMouseLeave}
               >
                 <button
                   onClick={() => navigate("/services")}
                   className={`flex items-center gap-1 transition-colors duration-300 tracking-widest uppercase ${
+                    isActive("/services") ? "active-link" : ""
+                  } ${
                     isScrolled
                       ? "text-black hover:text-red-900"
                       : "text-white hover:text-gray-300"
@@ -188,17 +243,20 @@ const Navbar = () => {
               </div>
 
               {navLinksAfterServices.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`transition-colors duration-300 tracking-widest uppercase  ${
-                    isScrolled
-                      ? "text-black hover:text-red-900"
-                      : "text-white hover:text-gray-300"
-                  }`}
-                >
-                  {link.name}
-                </Link>
+                <div key={link.name} className="nav-link-wrapper">
+                  <Link
+                    to={link.path}
+                    className={`transition-colors duration-300 tracking-widest uppercase ${
+                      isActive(link.path) ? "active-link" : ""
+                    } ${
+                      isScrolled
+                        ? "text-black hover:text-red-900"
+                        : "text-white hover:text-gray-300"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </div>
               ))}
             </div>
 
@@ -241,7 +299,11 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="block px-4 py-3 text-black hover:bg-red-700/20 hover:text-red-400 transition-colors font-bold tracking-widest uppercase rounded-lg"
+                className={`block px-4 py-3 hover:bg-red-700/20 hover:text-red-400 transition-colors font-bold tracking-widest uppercase rounded-lg ${
+                  isActive(link.path)
+                    ? "text-red-900 bg-red-50"
+                    : "text-black"
+                }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
@@ -260,7 +322,11 @@ const Navbar = () => {
                     setIsServicesOpen(false);
                   }
                 }}
-                className="w-full flex items-center justify-between px-4 py-3 text-black hover:bg-red-700/20 hover:text-red-400 transition-colors font-bold tracking-widest uppercase rounded-lg"
+                className={`w-full flex items-center justify-between px-4 py-3 hover:bg-red-700/20 hover:text-red-400 transition-colors font-bold tracking-widest uppercase rounded-lg ${
+                  isActive("/services")
+                    ? "text-red-900 bg-red-50"
+                    : "text-black"
+                }`}
               >
                 Services
                 <ChevronDown
@@ -309,7 +375,11 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="block px-4 py-3 text-black hover:bg-red-700/20 hover:text-red-400 transition-colors font-bold tracking-widest uppercase rounded-lg"
+                className={`block px-4 py-3 hover:bg-red-700/20 hover:text-red-400 transition-colors font-bold tracking-widest uppercase rounded-lg ${
+                  isActive(link.path)
+                    ? "text-red-900 bg-red-50"
+                    : "text-black"
+                }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
@@ -331,59 +401,81 @@ const Navbar = () => {
 
       {/* Booking Modal */}
       {isBookingModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-2">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col md:flex-row overflow-hidden relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-3 overflow-hidden">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md my-4 overflow-hidden relative">
             <button
               onClick={() => setIsBookingModalOpen(false)}
-              className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 transition-colors"
+              className="absolute top-2 right-2 bg-white rounded-full p-1.5 shadow-md z-10 hover:bg-gray-100 transition-colors"
             >
-              <X className="w-5 h-5 text-gray-700" />
+              <X className="w-4 h-4 text-gray-700" />
             </button>
 
-            <div className="w-full md:w-1/2 flex-shrink-0">
+            <div className="w-full h-32 flex-shrink-0">
               <img
-                src="/booknow-img.jpg"
+                src="/booknow.jpg"
                 alt="Wedding Photography"
-                className="w-full h-48 md:h-full object-cover md:rounded-l-xl rounded-t-xl"
+                className="w-full h-full object-cover"
               />
             </div>
 
-            <div className="w-full md:w-1/2 p-4 flex flex-col flex-1 overflow-y-auto">
-              <h2 className="text-lg font-bold text-gray-800 mb-1">
+            <div className="w-full p-4 sm:p-5 overflow-y-auto max-h-[90vh]">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
                 Book Your Photoshoot
               </h2>
-              <p className="text-gray-600 mb-4 text-sm">
-                Fill out the form below and we'll get back to you.
+              <p className="text-gray-600 mb-3 text-xs sm:text-sm">
+                Fill out the form and we'll contact you soon.
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-3 flex-1">
-                <div>
-                  <label className="block text-gray-700 text-sm mb-1">
-                    Full Name
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                      <User className="h-4 w-4 text-gray-400" />
+              <form onSubmit={handleSubmit} className="space-y-3">
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-gray-700 text-xs font-medium mb-1">
+                      Full Name
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                        <User className="h-3.5 w-3.5 text-gray-400" />
+                      </div>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 focus:border-transparent text-xs"
+                        placeholder="Your name"
+                      />
                     </div>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full pl-8 pr-2 py-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 text-sm"
-                      placeholder="Your name"
-                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 text-xs font-medium mb-1">
+                      Phone
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                        <Phone className="h-3.5 w-3.5 text-gray-400" />
+                      </div>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 focus:border-transparent text-xs"
+                        placeholder="1234567890"
+                      />
+                    </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">
+                  <label className="block text-gray-700 text-xs font-medium mb-1">
                     Email
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                      <Mail className="h-4 w-4 text-gray-400" />
+                      <Mail className="h-3.5 w-3.5 text-gray-400" />
                     </div>
                     <input
                       type="email"
@@ -391,88 +483,76 @@ const Navbar = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-8 pr-2 py-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 text-sm"
+                      className="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 focus:border-transparent text-xs"
                       placeholder="your.email@example.com"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-gray-700 text-sm mb-1">
-                    Phone
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                      <Phone className="h-4 w-4 text-gray-400" />
-                    </div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full pl-8 pr-2 py-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 text-sm"
-                      placeholder="(123) 456-7890"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex gap-2">
-                  <div className="flex-1">
-                    <label className="block text-gray-700 text-sm mb-1">
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-gray-700 text-xs font-medium mb-1">
                       Event Type
                     </label>
                     <select
                       name="eventType"
                       value={formData.eventType}
                       onChange={handleInputChange}
-                      className="w-full px-2 py-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 text-sm"
+                      className="w-full px-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 focus:border-transparent text-xs"
                     >
                       <option value="wedding">Wedding</option>
                       <option value="prewedding">Pre-Wedding</option>
+                      <option value="birthday">Birthday</option>
+                      <option value="babyshoot">Baby Shoot</option>
                       <option value="maternity">Maternity</option>
-                      <option value="baby">Baby Shoot</option>
-                      <option value="event">Event</option>
-                      <option value="product">Product</option>
-                      <option value="outdoor">Outdoor</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
 
-                  <div className="flex-1">
-                    <label className="block text-gray-700 text-sm mb-1">
-                      Preferred Date
+                  <div>
+                    <label className="block text-gray-700 text-xs font-medium mb-1">
+                      Event Date
                     </label>
-                    <input
-                      type="date"
-                      name="eventDate"
-                      value={formData.eventDate}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-2 py-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 text-sm"
-                    />
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                        <Calendar className="h-3.5 w-3.5 text-gray-400" />
+                      </div>
+                      <input
+                        type="date"
+                        name="eventDate"
+                        value={formData.eventDate}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 focus:border-transparent text-xs"
+                      />
+                    </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 text-sm mb-1">
+                  <label className="block text-gray-700 text-xs font-medium mb-1">
                     Message
                   </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows={3}
-                    className="w-full px-2 py-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 text-sm resize-none"
-                    placeholder="Tell us about your event.."
-                  ></textarea>
+                  <div className="relative">
+                    <div className="absolute top-2 left-2 pointer-events-none">
+                      <MessageSquare className="h-3.5 w-3.5 text-gray-400" />
+                    </div>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      rows="2"
+                      className="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-900 focus:border-transparent text-xs"
+                      placeholder="Your message..."
+                    ></textarea>
+                  </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-red-900 hover:bg-red-800 text-white font-semibold py-2 rounded-md transition-all duration-300"
+                  className="w-full bg-red-900 hover:bg-red-800 text-white py-2 rounded-md font-semibold transition-all duration-300 text-xs sm:text-sm"
                 >
-                  Submit Booking Request
+                  Submit Booking
                 </button>
               </form>
             </div>

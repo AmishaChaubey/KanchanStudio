@@ -4,13 +4,17 @@ const ServicesSection = () => {
   const services = [
     { id: 1, title: "Wedding Photography", description: "Capture your special day with timeless elegance and emotion", image: "/wedd-img/wedd3.jpg", link: "/services/wedding-photography" },
     { id: 2, title: "Portrait Sessions", description: "Professional portraits that showcase your unique personality", image: "/pot-img/pot9.jpg", link: "/services/portrait-shoot" },
-    { id: 3, title: "Event Photography", description: "Preserve precious moments with your loved ones forever", image: "/event-img/event10.jpeg", link: "/services/event-photography" },
-    { id: 4, title: "Prewedding-shoot", description: "Professional coverage for your business occasions and team", image: "/pre-wedd/pre-wedd1.jpeg", link: "/services/prewedding-shoot" },
-    { id: 5, title: "Photo-framing", description: "Gentle and artistic portraits of your newest family member", image: "/frames/frame1.jpeg", link: "/services/photo-framing" },
-    { id: 6, title: "Product Photography", description: "Stunning visuals that make your products shine and sell", image: "/service-img/pro1.jpeg", link: "/services/product-photography" },
-    { id: 7, title: "PVC Card", description: "Premium PVC cards that make your brand truly shine", image: "/pvc-img/pvc1.jpg", link: "/pvc-img/pvc2.jpg" },
-    { id: 8, title: "Printout", description: "High-quality photo printouts that make memories come alive.", image: "/printout-img/printout2.jpg", link: "/services/printout2.jpg" },
-        { id: 9, title: "Visa photo passport", description: "Professional visa photos capturing your identity clearly and accurately.", image: "/visa-passport/visa2.jpg", link: "/passport.jpg" }
+    { id: 4, title: "Event Photography", description: "Preserve precious moments with your loved ones forever", image: "/event-img/event10.jpeg", link: "/services/event-photography" },
+        { id: 5, title: "Indoor Photography", description: "From cozy corners to grand halls — every shot matters.", image: "/indoor-img/indoor3.jpg", link: "/services/indoor-shoot" },
+
+            { id: 6, title: "Outdoor Photography", description: "Where nature becomes your backdrop and magic unfolds.", image: "/out-img/out2.jpeg", link: "/services/outdoor-photography" },
+
+    { id: 7, title: "Prewedding-shoot", description: "Professional coverage for your business occasions and team", image: "/pre-wedd/pre-wedd1.jpeg", link: "/services/prewedding-shoot" },
+    { id: 8, title: "Photo-framing", description: "Gentle and artistic portraits of your newest family member", image: "/frames/frame1.jpeg", link: "/services/photo-framing" },
+    { id: 9, title: "Product Photography", description: "Stunning visuals that make your products shine and sell", image: "/service-img/pro1.jpeg", link: "/services/product-photography" },
+    { id: 10, title: "PVC Card", description: "Premium PVC cards that make your brand truly shine", image: "/pvc-img/pvc1.jpg", link: "/services/pvc-cards" },
+    { id: 11, title: "Printout", description: "High-quality photo printouts that make memories come alive.", image: "/printout-img/printout2.jpg", link: "services/photo-printing" },
+        { id: 12, title: "Visa photo passport", description: "Professional visa photos capturing your identity clearly and accurately.", image: "/visa-passport/visa2.jpg", link: "/services/visa-passport" }
 
   ];
 
@@ -66,7 +70,7 @@ const ServicesSection = () => {
   );
 
   return (
-    <div className="min-h-screen bg-white py-16 sm:py-20 px-2 sm:px-4 relative overflow-hidden">
+    <div className=" bg-white py-16 sm:py-20 px-2 sm:px-4 relative overflow-hidden">
       <div className="text-center mb-12 sm:mb-16 max-w-7xl mx-auto">
         <h2 className="text-3xl sm:text-5xl font-bold text-black mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Our <span className="text-red-900">Services</span></h2>
         <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-transparent via-amber-700 to-transparent mx-auto mb-4 rounded-full"></div>

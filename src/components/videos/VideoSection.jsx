@@ -319,7 +319,7 @@ const VideoSection = () => {
       {/* Photo Studio Header */}
       <header className="relative h-[60vh] sm:h-[80vh] flex items-center justify-center text-center overflow-hidden">
         <img
-          src="/banner/service-banner.jpg"
+          src="/video-banner2.jpg"
           alt="Photo Studio Banner"
           className="absolute inset-0 w-full h-full object-cover animate-zoom"
         />
@@ -332,12 +332,12 @@ const VideoSection = () => {
         <div className="absolute bottom-0 left-1/2 w-40 h-40 bg-red-100 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }} />
         
         <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-40 md:py-45">
-          <div className="inline-flex items-center gap-3  backdrop-blur-xl px-6 py-3 rounded-full mb-6 border border-white/10">
+          {/* <div className="inline-flex items-center gap-3  backdrop-blur-xl px-6 py-3 rounded-full mb-6 border border-white/10">
             <Camera className="text-white" size={20} />
             <span className="text-white font-bold text-sm tracking-widest" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               PROFESSIONAL PHOTO STUDIO
             </span>
-          </div>
+          </div> */}
           
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-white">
             Capture Perfect Moments

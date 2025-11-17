@@ -13,7 +13,7 @@ export default function VideoSection() {
 
   const categories = [
     { id: 'all', label: 'All Work', icon: Camera },
-    { id: 'wedding', label: 'Weddings', icon: Video },
+    //{ id: 'wedding', label: 'Weddings', icon: Video },
 
   ];
 
@@ -84,7 +84,7 @@ export default function VideoSection() {
             {categories.map((cat) => {
               const Icon = cat.icon;
               return (
-                <button
+              <Link to='/videos'>  <button
                   key={cat.id}
                   onClick={() => setActiveTab(cat.id)}
                   className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 ${
@@ -95,7 +95,7 @@ export default function VideoSection() {
                 >
                   <Icon size={18} />
                   <span className="font-medium text-sm hidden sm:inline">{cat.label}</span>
-                </button>
+                </button></Link>
               );
             })}
           </div>
@@ -155,9 +155,9 @@ export default function VideoSection() {
                   <h3 className="text-3xl lg:text-5xl font-bold text-white mb-3">
                     The Perfect Moment
                   </h3>
-                  <p className="text-gray-200 text-lg mb-6 max-w-lg">
+                  {/* <p className="text-gray-200 text-lg mb-6 max-w-lg">
                     A beautiful wedding story captured in stunning 4K. Watch how we transform moments into memories.
-                  </p>
+                  </p> */}
                   <div className="flex items-center gap-6 text-white">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>

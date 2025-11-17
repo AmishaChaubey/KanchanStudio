@@ -10,8 +10,10 @@ export default function MarqueePhotoGallery() {
     { url: '/wedd-img/wedd12.jpg', alt: 'Wedding photoshoot', category: 'Wedding', link: '/services/wedding-photography' },
     { url: '/pre-wedd/pre-wedd9.jpeg', alt: 'Pre-Wedding shoot', category: 'Pre-Wedding', link: '/services/prewedding-shoot' },
     { url: '/pot-img/pot5.jpg', alt: 'Portrait photography', category: 'Portrait', link: '/services/portrait-shoot' },
-    { url: '/event-img/event3.jpg', alt: 'Event Photography', category: 'Event', link: '/services/event-photography' },
+    { url: '/event-img/event4.jpg', alt: 'Event Photography', category: 'Event', link: '/services/event-photography' },
     { url: '/product-img/product2.jpg', alt: 'Product photography setup', category: 'Product', link: '/services/product-photography' },
+        { url: '/indoor-img/indoor11.jpg', alt: 'Indoor photoshoot', category: 'Indoor', link: '/services/indoor-shoot' },
+
     { url: '/out-img/out1.jpeg', alt: 'Outdoor photoshoot', category: 'Outdoor', link: '/services/outdoor-photography' },
     { url: '/birthday-img/birthday10.jpg', alt: 'Birthday photoshoot', category: 'Birthday', link: '/services/birthday' },
     { url: '/baby-img/baby22.jpg', alt: 'Baby Photoshoot', category: 'Baby Photoshoot', link: '/services/baby-shoot' },
