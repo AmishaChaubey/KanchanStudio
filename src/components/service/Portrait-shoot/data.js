@@ -29,7 +29,7 @@ export const galleryItems = [
   },
   { 
     id: 5, 
-    image: "/pot-img/pot5.jpg", 
+    image: "/pot-img/pot15.JPG", 
     title: "Portrait shoot", 
     category: "portrait",
     size: "medium"
@@ -57,7 +57,7 @@ export const galleryItems = [
   },
   { 
     id: 9, 
-    image: "/pot-img/pot9.jpg", 
+    image: "/pot-img/pot17.JPG", 
     title: "Portrait shoot", 
     category: "portrait",
     size: "small"

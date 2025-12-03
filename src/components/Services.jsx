@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 const ServicesSection = () => {
   const services = [
     { id: 1, title: "Wedding Photography", description: "Capture your special day with timeless elegance and emotion", image: "/wedd-img/wedd3.jpg", link: "/services/wedding-photography" },
-    { id: 2, title: "Portrait Sessions", description: "Professional portraits that showcase your unique personality", image: "/pot-img/pot9.jpg", link: "/services/portrait-shoot" },
+    { id: 2, title: "Portrait Sessions", description: "Professional portraits that showcase your unique personality", image: "/pot-img/pot15.JPG", link: "/services/portrait-shoot" },
     { id: 4, title: "Event Photography", description: "Preserve precious moments with your loved ones forever", image: "/event-img/event10.jpeg", link: "/services/event-photography" },
         { id: 5, title: "Indoor Photography", description: "From cozy corners to grand halls — every shot matters.", image: "/indoor-img/indoor3.jpg", link: "/services/indoor-shoot" },
 

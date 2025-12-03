@@ -48,6 +48,13 @@ export const galleryItems = [
     category: "Cards",
     size: "small"
   },
+    { 
+    id: 8, 
+    image: "/visa-passport/visa7.jpg", 
+    title: "Visa-Passport", 
+    category: "Cards",
+    size: "small"
+  },
   
 
 ];

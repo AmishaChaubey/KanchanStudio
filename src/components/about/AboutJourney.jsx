@@ -270,7 +270,7 @@ export default function PhotoStudioLanding() {
 
             <Card>
               <img
-                src="/product-img/product3.jpg"
+                src="/product-img/product2.webp"
                 alt="Product Photography"
                 className="w-full h-full object-cover"
               />

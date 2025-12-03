@@ -117,7 +117,7 @@ const Footer = () => {
             <div className="space-y-4 text-gray-800 text-sm md:text-base">
               <div className="flex gap-3 items-start">
                 <MapPin size={20} className="text-red-900 mt-1 flex-shrink-0" />
-                <p>KANCHAN STUDIO, Greater Noida, UP</p>
+                <p>Gate No - 4, Parmukh Market, Shop-3, Bisrakh Rd, opposite STELLAR JEEVAN, Greater Noida, Uttar Pradesh 201306</p>
               </div>
 
               <div className="flex gap-3 items-center">

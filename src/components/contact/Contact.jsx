@@ -1,326 +1,337 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Menu,
-  X,
-  ChevronDown,
-  Calendar,
-  User,
-  Mail,
   Phone,
+  Mail,
+  MapPin,
+  Send,
+  User,
   MessageSquare,
+  PhoneCall,
+  ChevronDown,
 } from "lucide-react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const timeoutRef = useRef(null);
-  const navigate = useNavigate();
-  const location = useLocation();
-
+export default function ContactPage() {
+  const [openFaq, setOpenFaq] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    eventType: "wedding",
-    eventDate: "",
+    subject: "",
     message: "",
   });
+  const [offsetY, setOffsetY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.scrollTo(0, 0);
+
+    const handleScroll = () => setOffsetY(window.scrollY * 0.5);
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
+  const contactInfo = [
+    {
+      icon: Phone,
+      title: "Book Photoshoot",
+      detail: "+91 9958138641",
+      subdDetail: "Available 24/7",
+    },
+    {
+      icon: Mail,
+      title: "Email Us",
+      detail: "Kpstudioandphotoframing@gmail.com",
+      subdDetail: "We reply within 24 hrs",
+    },
+    {
+      icon: MapPin,
+      title: "Studio Location",  
+      detail: "Gate No - 4, Parmukh Market, Shop-3, Bisrakh Rd,opposite STELLAR JEEVAN",
+      subdDetail: "Greater Noida, Uttar Pradesh 201306",
+    },
+  ];
 
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.key === "Escape") setIsBookingModalOpen(false);
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, []);
+  const faqs = [
+    {
+      question: "How can I book a photoshoot?",
+      answer:
+        "You can fill the contact form or call our booking number. Our team will get in touch with you within 24 hours to schedule your shoot.",
+    },
+    {
+      question: "Do you offer outdoor photoshoots?",
+      answer:
+        "Yes, we specialize in both indoor and outdoor shoots. You can choose any location or we can suggest beautiful outdoor spots nearby.",
+    },
+    {
+      question: "What should I wear for my shoot?",
+      answer:
+        "You can wear anything that makes you comfortable and confident. We also provide outfit guidance based on the theme of your shoot.",
+    },
+    {
+      question: "How long does it take to get edited photos?",
+      answer:
+        "Usually, you’ll receive your edited photos within 5–7 working days. We also offer express delivery options on request.",
+    },
+    {
+      question: "Can I get raw photos too?",
+      answer:
+        "Yes, raw photos can be provided upon request. We keep all your files safe for up to 30 days after the shoot.",
+    },
+    {
+      question: "Do you travel for destination shoots?",
+      answer:
+        "Absolutely! We love capturing destination events and offer custom travel packages for outstation shoots.",
+    },
+  ];
 
-  // Prevent body scroll when modal is open
-  useEffect(() => {
-    document.body.style.overflow = isBookingModalOpen ? "hidden" : "unset";
-    return () => (document.body.style.overflow = "unset");
-  }, [isBookingModalOpen]);
+  const handleInputChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleServicesMouseEnter = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setIsServicesOpen(true);
-  };
-
-  const handleServicesMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setIsServicesOpen(false);
-    }, 200);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // ✅ Updated handleSubmit with backend fetch
+  // ⭐⭐ API Integrated Here ⭐⭐
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost/Kanchan-Studio/backend/send-mail.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          subject: `Booking: ${formData.eventType} on ${formData.eventDate}`,
-          message: formData.message,
-        }),
-      });
+      const response = await fetch(
+        "https://kpstudioandphotoframing.in/backend/send-mail.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+          }),
+        }
+      );
 
-      const data = await res.json();
-      console.log("Booking form response:", data);
+      const data = await response.json();
+      console.log("API Response:", data);
 
       if (data.success) {
-        alert("✅ Booking request submitted successfully! We'll contact you soon.");
-        setIsBookingModalOpen(false);
+        alert("Message sent successfully!");
+
         setFormData({
           name: "",
           email: "",
           phone: "",
-          eventType: "wedding",
-          eventDate: "",
+          subject: "",
           message: "",
         });
       } else {
-        alert("❌ Failed to send booking request: " + data.message);
+        alert("Failed: " + data.message);
       }
     } catch (error) {
-      console.error("Booking submission error:", error);
-      alert("⚠️ Something went wrong. Please try again later.");
+      console.error("Error:", error);
+      alert("Something went wrong. Try again.");
     }
   };
 
-  const isActive = (path) => {
-    if (path === "/services") return location.pathname.startsWith("/services");
-    return location.pathname === path;
-  };
-
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-  ];
-
-  const navLinksAfterServices = [
-    { name: "Gallery", path: "/gallery" },
-    { name: "Video", path: "/videos" },
-    { name: "Contact", path: "/contact" },
-  ];
-
-  const serviceItems = [
-    { name: "Photo Framing", path: "/services/photo-framing" },
-    { name: "Photo Printing", path: "/services/photo-printing" },
-    { name: "Indoor Shoot", path: "/services/indoor-shoot" },
-    { name: "Outdoor Shoot", path: "/services/outdoor-photography" },
-    { name: "PVC Cards", path: "/services/pvc-cards" },
-    { name: "Baby Shoot", path: "/services/baby-shoot" },
-    { name: "Birthday Shoot", path: "/services/birthday" },
-    { name: "Visa-Passport", path: "/services/visa-passport" },
-    { name: "Event Shoot", path: "/services/event-photography" },
-    { name: "Portrait Shoot", path: "/services/portrait-shoot" },
-    { name: "Product Shoot", path: "/services/product-photography" },
-    { name: "Maternity Shoot", path: "/services/maternity-shoot" },
-    { name: "Wedding Shoot", path: "/services/wedding-photography" },
-    { name: "Pre-Wedding Shoot", path: "/services/prewedding-shoot" },
-    { name: "Wedding Cinematography", path: "/services/wedding-cinemo" },
-  ];
-
   return (
-    <>
-      <style>{`
-        @keyframes slideDown {
-          from { width: 0%; }
-          to { width: 100%; }
-        }
-        .active-link::after {
-          content: '';
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          height: 2px;
-          width: 100%;
-          background: linear-gradient(90deg, #7f1d1d, #991b1b, #7f1d1d);
-          animation: slideDown 0.3s ease-in-out;
-        }
-        .nav-link-wrapper { position: relative; }
-      `}</style>
+    <div className="min-h-screen bg-white text-gray-900">
+      {/* Banner */}
+      <div className="relative bg-red-900 text-white overflow-hidden h-[80vh] flex items-center justify-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center animate-zoom"
+          style={{
+            backgroundImage: "url('/banner/contact-banner.jpg')",
+            transform: `translateY(${offsetY}px)`,
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-black/30"></div>
 
-      <nav
-        className={`fixed w-full z-50 transition-all duration-300 ${
-          isScrolled ? "bg-white shadow-lg" : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 sm:h-18 md:h-20">
-            <Link to="/" className="flex-shrink-0">
-              <div className="flex items-center gap-3">
-                <img
-                  src="/kn-logo.svg"
-                  alt="Logo"
-                  className="h-40 w-54 sm:h-42 sm:w-58 md:h-43 md:w-60 object-contain"
-                />
-              </div>
-            </Link>
+        <div className="relative text-center z-10 max-w-6xl px-6">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 font-serif text-white">
+            Let’s Create Magic Together
+          </h1>
+          <p className="text-lg text-white/90">
+            Have a photoshoot idea in mind? Reach out and let’s make it happen.
+          </p>
+        </div>
 
-            {/* Desktop Links */}
-            <div className="hidden min-[769px]:flex lg:gap-8 md:gap-4 text-sm font-medium items-center lg:space-x-2 md:space-x-1 ml-4 lg:ml-8">
-              {navLinks.map((link) => (
-                <div key={link.name} className="nav-link-wrapper">
-                  <Link
-                    to={link.path}
-                    className={`transition-colors duration-300 tracking-widest uppercase ${
-                      isActive(link.path) ? "active-link" : ""
-                    } ${
-                      isScrolled
-                        ? "text-black hover:text-red-900"
-                        : "text-white hover:text-gray-300"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                </div>
-              ))}
+        <style>{`
+          @keyframes zoom {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+          }
+          .animate-zoom { animation: zoom 15s infinite ease-in-out; }
+        `}</style>
+      </div>
 
-              {/* Services Dropdown */}
+      {/* Info Cards */}
+      <div className="max-w-5xl mx-auto px-6 py-20">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
+          {contactInfo.map((info, index) => {
+            const Icon = info.icon;
+            return (
               <div
-                className="relative nav-link-wrapper"
-                onMouseEnter={handleServicesMouseEnter}
-                onMouseLeave={handleServicesMouseLeave}
+                key={index}
+                className="relative group bg-white border border-gray-200 rounded-2xl p-8 transition-all duration-700 hover:scale-105 hover:shadow-2xl hover:shadow-[#C8252C]/20 overflow-hidden"
               >
-                <button
-                  onClick={() => navigate("/services")}
-                  className={`flex items-center gap-1 transition-colors duration-300 tracking-widest uppercase ${
-                    isActive("/services") ? "active-link" : ""
-                  } ${
-                    isScrolled
-                      ? "text-black hover:text-red-900"
-                      : "text-white hover:text-gray-300"
-                  }`}
-                >
-                  Services
-                  <ChevronDown className="w-4 h-4" />
-                </button>
+                <span className="absolute left-0 top-0 w-0 h-[2px] bg-[#C8252C] group-hover:w-full transition-all duration-500"></span>
+                <span className="absolute right-0 bottom-0 w-0 h-[2px] bg-[#C8252C] group-hover:w-full transition-all duration-500"></span>
+                <span className="absolute right-0 top-0 h-0 w-[2px] bg-[#C8252C] group-hover:h-full transition-all duration-500"></span>
+                <span className="absolute left-0 bottom-0 h-0 w-[2px] bg-[#C8252C] group-hover:h-full transition-all duration-500"></span>
 
-                {isServicesOpen && (
-                  <div className="absolute top-full left-0 w-56 bg-white shadow-xl rounded-lg overflow-hidden mt-2 animate-fadeIn max-h-80 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-                    {serviceItems.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.path}
-                        className="block px-6 py-3 text-black hover:bg-red-900 hover:text-white transition-colors duration-200 text-sm"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
+                <div className="relative flex flex-col items-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-[#C8252C] rounded-xl mb-5">
+                    <Icon className="w-8 h-8 text-white" />
                   </div>
-                )}
+                  <h3 className="font-bold text-red-900 text-lg mb-2">
+                    {info.title}
+                  </h3>
+                  <p className="text-sm font-semibold text-red-900 mb-1">
+                    {info.detail}
+                  </p>
+                  <p className="text-sm text-gray-700">{info.subdDetail}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Form + Map */}
+      <div className="relative py-16 bg-white overflow-hidden">
+        <div className="relative max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-10 z-10">
+          {/* Form */}
+          <div className="relative bg-white border border-red-900 shadow-lg rounded-2xl p-8 transition-all duration-500 hover:border-red-900/50">
+            <h2 className="text-3xl font-bold mb-6 text-red-900">
+              Send Us a Message
+            </h2>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {[
+                { label: "Full Name", name: "name", icon: User, type: "text" },
+                { label: "Email", name: "email", icon: Mail, type: "email" },
+                {
+                  label: "Phone Number",
+                  name: "phone",
+                  icon: PhoneCall,
+                  type: "tel",
+                },
+                {
+                  label: "Subject",
+                  name: "subject",
+                  icon: MessageSquare,
+                  type: "text",
+                },
+              ].map((field, i) => {
+                const Icon = field.icon;
+                return (
+                  <div key={i}>
+                    <label className="block text-sm font-semibold mb-2 text-red-900">
+                      {field.label}
+                    </label>
+                    <div className="relative">
+                      <Icon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-red-900/50" />
+                      <input
+                        type={field.type}
+                        name={field.name}
+                        value={formData[field.name]}
+                        onChange={handleInputChange}
+                        className="w-full pl-10 pr-4 py-3 bg-white text-red-900 border border-red-900/30 rounded-lg focus:ring-2 focus:ring-red-900 focus:border-transparent placeholder-red-900/50 outline-none transition-all"
+                        placeholder={`Enter your ${field.label.toLowerCase()}`}
+                        required
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+
+              <div>
+                <label className="block text-sm font-semibold mb-2 text-red-900">
+                  Message
+                </label>
+                <div className="relative">
+                  <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-red-900/50" />
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows="4"
+                    className="w-full pl-10 pr-4 py-3 bg-white text-red-900 border border-red-900/30 rounded-lg focus:ring-2 focus:ring-red-900 placeholder-red-900/50 outline-none transition-all"
+                    placeholder="Your message..."
+                    required
+                  ></textarea>
+                </div>
               </div>
 
-              {navLinksAfterServices.map((link) => (
-                <div key={link.name} className="nav-link-wrapper">
-                  <Link
-                    to={link.path}
-                    className={`transition-colors duration-300 tracking-widest uppercase ${
-                      isActive(link.path) ? "active-link" : ""
-                    } ${
-                      isScrolled
-                        ? "text-black hover:text-red-900"
-                        : "text-white hover:text-gray-300"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                </div>
-              ))}
-            </div>
+              <button
+                type="submit"
+                className="w-full bg-red-900 text-white py-3 px-6 rounded-lg font-semibold hover:opacity-90 transition-all transform hover:scale-[1.03] flex items-center justify-center gap-2 shadow-lg shadow-red-900/30"
+              >
+                <Send className="w-5 h-5" /> Send Message
+              </button>
+            </form>
+          </div>
 
-            {/* Book Now Button */}
-            <button
-              onClick={() => setIsBookingModalOpen(true)}
-              className="hidden sm:max-[768px]:block min-[769px]:block bg-red-900 hover:bg-red-800 text-white sm:px-4 md:px-5 lg:px-8 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 font-semibold tracking-wider uppercase text-xs lg:text-sm flex-shrink-0"
-            >
-              Book Now
-            </button>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`max-[768px]:block min-[769px]:hidden transition-colors duration-300 ${
-                isScrolled ? "text-black" : "text-white"
-              }`}
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+          {/* Map */}
+          <div className="relative rounded-2xl overflow-hidden shadow-lg border border-red-900 transition-all duration-500 hover:border-red-900/50">
+            <iframe
+              title="Studio Map"
+              className="w-full h-full min-h-[400px] transform transition-transform duration-500 hover:scale-95"
+              src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d529153.2451992526!2d77.32019303488845!3d28.493852918194584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x390cefeb1c19ffad%3A0xf989fc42fb6f281!2sGate%20No%20-%204%2C%20Parmukh%20Market%2C%20Shop-3%2C%20Bisrakh%20Rd%2C%20opposite%20STELLAR%20JEEVAN%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20201306!3m2!1d28.565932399999998!2d77.4483253!5e0!3m2!1sen!2sin!4v1764148183184!5m2!1sen!2sin"
+               allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {/* (unchanged) */}
-      </nav>
-
-      {/* Booking Modal */}
-      {isBookingModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-3 overflow-hidden">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md my-4 overflow-hidden relative">
-            <button
-              onClick={() => setIsBookingModalOpen(false)}
-              className="absolute top-2 right-2 bg-white rounded-full p-1.5 shadow-md z-10 hover:bg-gray-100 transition-colors"
+      {/* FAQ */}
+      <div className="max-w-7xl mx-auto px-6 py-16 sm:py-20">
+        <div className="text-center mb-16">
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-4 text-black"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            Frequently Asked{" "}
+            <span
+              className="text-transparent bg-red-900 bg-clip-text"
+              style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              <X className="w-4 h-4 text-gray-700" />
-            </button>
-
-            <div className="w-full h-32 flex-shrink-0">
-              <img
-                src="/booknow.jpg"
-                alt="Wedding Photography"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="w-full p-4 sm:p-5 overflow-y-auto max-h-[90vh]">
-              <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
-                Book Your Photoshoot
-              </h2>
-              <p className="text-gray-600 mb-3 text-xs sm:text-sm">
-                Fill out the form and we'll contact you soon.
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-3">
-                {/* (form fields unchanged — already fine) */}
-              </form>
-            </div>
-          </div>
+              question
+            </span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-amber-700 to-transparent mx-auto mb-6 rounded-full"></div>
         </div>
-      )}
-    </>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="bg-white border border-red-900 rounded-2xl shadow-lg overflow-hidden"
+            >
+              <button
+                className="w-full p-4 flex justify-between items-center text-left"
+                onClick={() => setOpenFaq(openFaq === index ? null : index)}
+              >
+                <h3 className="font-semibold text-red-900">{faq.question}</h3>
+                <ChevronDown
+                  className={`w-5 h-5 text-red-900 transition-transform ${
+                    openFaq === index ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              <div
+                className={`px-4 pb-4 text-gray-700 transition-all duration-300 ${
+                  openFaq === index
+                    ? "max-h-96 opacity-100"
+                    : "max-h-0 opacity-0 overflow-hidden"
+                }`}
+              >
+                {faq.answer}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
-};
-
-export default Navbar;
+}

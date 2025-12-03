@@ -48,14 +48,14 @@ const PhotoStudioWebsite = () => {
     {
       id: 4,
       title: "Product Photography",
-      coverImage: "product-img/product1.jpg",
+      coverImage: "product-img/product2.webp",
       images: [
-        "product-img/product2.jpg",
-        "product-img/product4.jpeg",
-        "product-img/product5.jpg",
-        "product-img/product6.jpg",
-        "product-img/product7.jpg",
-        "product-img/product8.jpg",
+        "product-img/product3.webp",
+        "product-img/product4.webp",
+        "product-img/product5.webp",
+        "product-img/product12.webp",
+        "product-img/product14.webp",
+        "product-img/product15.webp",
       ],
     },
     {

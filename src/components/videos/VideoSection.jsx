@@ -761,7 +761,10 @@ const VideoSection = () => {
             )}
           </div>
         </div>
-        <CTA/>
+        <div className='mt-4'>
+   <CTA/>
+        </div>
+     
        
       </div>
       
