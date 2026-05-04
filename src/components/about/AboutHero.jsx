@@ -24,7 +24,7 @@ export default function AboutHero({ isVisible }) {
       ></div>
 
       {/* Overlay for text clarity */}
-      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 bg-black/20"></div>
 
       {/* Banner Content */}
       <div

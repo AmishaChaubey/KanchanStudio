@@ -1,69 +1,91 @@
-export const galleryItems = [
-  { 
-    id: 1, 
-    image: "/visa-passport/visa1.jpg", 
-    title: "Visa-Passport", 
-    category: "portrait",
-    size: "large"
-  },
-  { 
-    id: 2, 
-    image: "/visa-passport/visa2.jpg", 
-    title: "Visa-Passport", 
-    category: "Cards",
-    size: "small"
-  },
-  { 
-    id: 3, 
-    image: "/visa-passport/visa3.jpg", 
-    title: "Visa-Passport", 
-    category: "Cards",
-    size: "small"
-  },
-  { 
-    id: 4, 
-    image: "/visa-passport/visa4.jpg", 
-    title: "Visa-Passport", 
-    category: "Cards",
-    size: "medium"
-  },
-  { 
-    id: 5, 
-    image: "/visa-passport/visa5.jpg", 
-    title: "Visa-Passport", 
-    category: "Cards",
-    size: "medium"
-  },
-  { 
-    id: 6, 
-    image: "/visa-passport/visa6.jpg", 
-    title: "Visa-Passport", 
-    category: "Cards",
-    size: "large"
-  },
-  { 
-    id: 7, 
-    image: "/visa-passport/passport.jpg", 
-    title: "Visa-Passport", 
-    category: "Cards",
-    size: "small"
-  },
-    { 
-    id: 8, 
-    image: "/visa-passport/visa7.jpg", 
-    title: "Visa-Passport", 
-    category: "Cards",
-    size: "small"
-  },
+// export const galleryItems = [
+//   { 
+//     id: 1, 
+//     image: "/event-img/wedd-event.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "large"
+//   },
+//   { 
+//     id: 2, 
+//     image: "/event-img/wedd-event2.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+//   { 
+//     id: 3, 
+//     image: "/event-img/wedd-event3.jpg", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "small"
+//   },
+//   { 
+//     id: 4, 
+//     image: "/event-img/wedd-event4.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "medium"
+//   },
+//   { 
+//     id: 5, 
+//     image: "/event-img/wedd-event5.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "medium"
+//   },
+//   { 
+//     id: 6, 
+//     image: "/event-img/wedd-event6.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "large"
+//   },
+//   { 
+//     id: 7, 
+//     image: "/event-img/wedd-event7.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+//   { 
+//     id: 8, 
+//     image: "/event-img/wedd-event8.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "medium"
+//   },
+//   { 
+//     id: 9, 
+//     image: "/event-img/wedd-event9.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+//   { 
+//     id: 10, 
+//     image: "/event-img/wedd-event10.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "small"
+//   },
+//   { 
+//     id: 11, 
+//     image: "/event-img/wedd-event11.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+  
   
 
-];
+// ];
 
 export const bannerConfig = {
-  backgroundImage: "/visa-passport/visa-banner.jpg",
-  badge: "Visa-Passport",
-  title: " Visa-Passport",
-  description: "Accurate visa photos printed for hassle-free travel documents."
+  backgroundImage: "/event-img/bannerr.jpg",
+  badge: "Professional Photography",
+  title: " Visa Passport",
+  description: "Explore our collection — where every smile, spark, and story comes alive."
 };
 
 export const breadcrumbItems = [
@@ -71,3 +93,5 @@ export const breadcrumbItems = [
   { label: "Service", href: "/services" },
   { label: "All Photos", href: "#", active: true }
 ];
+
+export const SERVICE_KEY = "visa-passport";

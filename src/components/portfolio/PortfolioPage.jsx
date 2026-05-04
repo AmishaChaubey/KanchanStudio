@@ -8,13 +8,13 @@ const PortfolioPage = () => {
       id: 1,
       title: "Wedding Photography",
       description: "Capturing beautiful moments of love and celebration",
-      imageUrl: "/wedd-img/wedd2.jpg",
+      imageUrl: "/wedd-img/wedding3.jfif",
     },
     {
       id: 2,
       title: "Portrait Sessions",
       description: "Professional portraits that capture your unique personality",
-      imageUrl: "/pot-img/pot5.jpg",
+      imageUrl: "/pot-img/port5.jpg",
     },
     {
       id: 3,
@@ -24,9 +24,9 @@ const PortfolioPage = () => {
     },
     {
       id: 4,
-      title: "Event Photography" ,
+      title: " Wedding Event Photography" ,
       description: "Annual gala with celebrity guests",
-      imageUrl: "/event-img/event3.jpg",
+      imageUrl: "/event-img/wedd-event2.jfif",
     },
     {
       id: 5,
@@ -38,7 +38,7 @@ const PortfolioPage = () => {
       id: 6,
       title: "Candid Photography",
       description: "Creative and conceptual photography works",
-      imageUrl: "/candid-img/candid3.jpg",
+      imageUrl: "/candid-img/candid1.jfif",
     },
   ];
 

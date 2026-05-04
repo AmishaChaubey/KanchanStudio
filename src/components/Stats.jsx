@@ -17,93 +17,96 @@ const Stats = () => {
     rootMargin: "-100px 0px",
   });
 
-  // Card entrance animations with stagger effect
   const cardSprings = useSprings(
     stats.length,
     stats.map((_, i) => ({
-      from: { opacity: 0, transform: "translateY(50px) scale(0.9)" },
+      from: { opacity: 0, transform: "translateY(40px) scale(0.95)" },
       to: {
         opacity: inView ? 1 : 0,
         transform: inView
           ? "translateY(0px) scale(1)"
-          : "translateY(50px) scale(0.9)",
+          : "translateY(40px) scale(0.95)",
       },
-      delay: i * 150,
-      config: { tension: 280, friction: 20 },
+      delay: i * 120,
+      config: { tension: 280, friction: 22 },
     }))
   );
 
-  // Number counting animations with bounce effect
   const numberSprings = stats.map((stat) =>
     useSpring({
       from: { number: 0 },
       to: { number: inView ? stat.value : 0 },
-      delay: 500 + stats.indexOf(stat) * 200,
-      config: { mass: 1, tension: 180, friction: 12 },
+      delay: 400 + stats.indexOf(stat) * 180,
+      config: { mass: 1, tension: 180, friction: 14 },
     })
   );
 
-  // Icon animations
   const iconSprings = useSprings(
     stats.length,
-    stats.map(() => ({
-      from: { rotate: -15, scale: 0.8 },
+    stats.map((_, i) => ({
+      from: { rotate: -12, scale: 0.7 },
       to: {
-        rotate: inView ? 0 : -15,
-        scale: inView ? 1 : 0.8,
+        rotate: inView ? 0 : -12,
+        scale: inView ? 1 : 0.7,
       },
-      delay: 300 + Math.random() * 300,
-      config: { tension: 300, friction: 10 },
+      delay: 250 + i * 100,
+      config: { tension: 300, friction: 12 },
     }))
   );
 
   return (
     <section className="py-20 bg-white relative overflow-hidden" ref={ref}>
-      {/* Background decoration */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-300 rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-pulse"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-amber-200 rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-pulse"></div>
+      {/* Subtle bg blobs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 -left-20 w-72 h-72 bg-red-100 rounded-full opacity-40 blur-3xl"></div>
+        <div className="absolute bottom-1/4 -right-20 w-72 h-72 bg-red-50 rounded-full opacity-30 blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
+
+        {/* Section heading */}
+        <div className="text-center mb-14">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-8 h-0.5 bg-red-600"></div>
+            <p className="text-red-600 text-xs font-bold uppercase tracking-[0.2em]">By the numbers</p>
+            <div className="w-8 h-0.5 bg-red-600"></div>
+          </div>
           <h2
-            className="text-4xl md:text-5xl font-bold mb-4 text-black"
+            className="text-4xl md:text-5xl font-bold text-gray-900"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Our{" "}
-            <span
-              className="text-transparent bg-red-900 bg-clip-text"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
+            <span className="text-red-600" style={{ fontFamily: "'Playfair Display', serif" }}>
               Achievements
             </span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-amber-700 to-transparent mx-auto mb-6 rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {/* Stats grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-8">
           {stats.map((stat, index) => {
             const StatIcon = stat.icon;
             return (
               <animated.div
                 key={index}
                 style={cardSprings[index]}
-                className="text-center group relative"
+                className="group relative"
               >
-                <div className="bg-gray-100 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 group-hover:border-amber-700/50 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-amber-600/10">
-                  <animated.div
-                    style={iconSprings[index]}
-                    className="inline-block mb-4"
-                  >
-                    <div className="p-3 sm:p-4 bg-gradient-to-br from-amber-200/40 to-red-300/40 rounded-full mb-4 group-hover:from-red-300/60 group-hover:to-red-400/60 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-amber-600/30">
-                      <StatIcon className="w-8 h-8 sm:w-10 sm:h-10 text-amber-900 group-hover:text-amber-800 transition-colors duration-300" />
+                <div className="relative bg-white border border-gray-100 hover:border-red-200 rounded-2xl p-6 sm:p-8 text-center transition-all duration-300 hover:shadow-xl hover:shadow-red-100 overflow-hidden">
+
+                  {/* Top accent bar */}
+                  <div className="absolute top-0 left-0 w-full h-1 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-t-2xl"></div>
+
+                  {/* Icon */}
+                  <animated.div style={iconSprings[index]} className="inline-block mb-5">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto bg-red-50 group-hover:bg-red-600 rounded-2xl flex items-center justify-center transition-all duration-300">
+                      <StatIcon className="w-7 h-7 sm:w-8 sm:h-8 text-red-600 group-hover:text-white transition-colors duration-300" />
                     </div>
                   </animated.div>
 
+                  {/* Number */}
                   <h3
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-2 group-hover:text-red-900 transition-colors duration-300"
+                    className="text-3xl sm:text-4xl font-bold text-gray-900 group-hover:text-red-600 transition-colors duration-300 mb-1"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                   >
                     <animated.span>
@@ -114,10 +117,8 @@ const Stats = () => {
                     {stat.value % 1 === 0 ? "+" : ""}
                   </h3>
 
-                  <p
-                    className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300"
-                    style={{ fontFamily: "'Lora', serif" }}
-                  >
+                  {/* Label */}
+                  <p className="text-gray-500 text-sm sm:text-base font-medium group-hover:text-gray-700 transition-colors duration-300">
                     {stat.label}
                   </p>
                 </div>
@@ -126,6 +127,11 @@ const Stats = () => {
           })}
         </div>
       </div>
+
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+      `}</style>
     </section>
   );
 };

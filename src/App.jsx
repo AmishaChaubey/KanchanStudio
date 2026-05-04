@@ -11,7 +11,7 @@ import Stats from "./components/Stats";
 import Testimonials from "./components/Testimonial";
 import Footer from "./components/Footer";
 import CTA from "./components/CTA";
-import VideoSection from "./components/VideoSection";
+//import VideoSection from "./components/VideoSection";
 import ContactPage from "./components/contact/Contact";
 import Portfolio from "./components/Portfolio";
 import WhyChooseUs from "./components/WhyChoose";
@@ -49,6 +49,8 @@ import FoodPhotography from "./components/service/food/Food"
 
 //Video Component
 import VideoSections from "./components/videos/VideoSection";
+import CallIcon from "./components/Call";
+import WhatsAppIcon from "./components/Icon";
 const App = () => {
   return (
     <Router>
@@ -65,7 +67,7 @@ const App = () => {
               <Stats />
               <VisualDiaryGallery /> {/* Gallery included */}
               <CTA />
-              <VideoSection/>
+              {/* <VideoSection/> */}
               <Portfolio />
               <WhyChooseUs />
               <Testimonials />
@@ -103,6 +105,8 @@ const App = () => {
                         <Route path="/services/visa-passport" element={<VisaPassport/>} />
                            <Route path="/services/birthday" element={<Birthday/>} />
       </Routes>
+      <CallIcon/>
+      <WhatsAppIcon/>
 
       <Footer />
     </Router>

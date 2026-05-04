@@ -238,7 +238,7 @@ export default function PhotoStudioLanding() {
           >
             <Card>
               <img
-                src="/wedd-img/wedd6.jpg"
+                src="/wedd-img/wedding3.jfif"
                 alt="Wedding Photography"
                 className="w-full h-full object-cover"
               />
@@ -254,7 +254,7 @@ export default function PhotoStudioLanding() {
 
             <Card>
               <img
-                src="wedd-ci/wedd-ci1.jpg"
+                src="wedd-ci/wedd-cin3.jpg"
                 alt="Wedding Cinematography"
                 className="w-full h-full object-cover"
               />
@@ -270,7 +270,7 @@ export default function PhotoStudioLanding() {
 
             <Card>
               <img
-                src="/product-img/product2.webp"
+                src="/product-img/pro5.jfif"
                 alt="Product Photography"
                 className="w-full h-full object-cover"
               />
@@ -286,7 +286,7 @@ export default function PhotoStudioLanding() {
 
             <Card>
               <img
-                src="/birthday-img/birthday10.jpg"
+                src="/birthday-img/birthday11.jfif"
                 alt="Birthday Photography"
                 className="w-full h-full object-cover"
               />

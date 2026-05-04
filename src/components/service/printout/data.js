@@ -1,91 +1,91 @@
-export const galleryItems = [
-  { 
-    id: 1, 
-    image: "/printout-img/printout1.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "large"
-  },
-  { 
-    id: 2, 
-    image: "/printout-img/printout2.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "small"
-  },
-  { 
-    id: 3, 
-    image: "/printout-img/printout3.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "small"
-  },
-  { 
-    id: 4, 
-    image: "/printout-img/printout4.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "medium"
-  },
-  { 
-    id: 5, 
-    image: "/printout-img/printout5.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "medium"
-  },
-  { 
-    id: 6, 
-    image: "/printout-img/printout7.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "large"
-  },
-  { 
-    id: 7, 
-    image: "/printout-img/printout7.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "small"
-  },
-  { 
-    id: 8, 
-    image: "/printout-img/printout8.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "medium"
-  },
-  { 
-    id: 9, 
-    image: "/printout-img/printout9.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "small"
-  },
-  { 
-    id: 10, 
-    image: "/printout-img/printout10.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "small"
-  },
-  { 
-    id: 11, 
-    image: "/printout-img/printout11.jpg", 
-    title: "Printout", 
-    category: "portrait",
-    size: "small"
-  },
+// export const galleryItems = [
+//   { 
+//     id: 1, 
+//     image: "/event-img/wedd-event.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "large"
+//   },
+//   { 
+//     id: 2, 
+//     image: "/event-img/wedd-event2.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+//   { 
+//     id: 3, 
+//     image: "/event-img/wedd-event3.jpg", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "small"
+//   },
+//   { 
+//     id: 4, 
+//     image: "/event-img/wedd-event4.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "medium"
+//   },
+//   { 
+//     id: 5, 
+//     image: "/event-img/wedd-event5.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "medium"
+//   },
+//   { 
+//     id: 6, 
+//     image: "/event-img/wedd-event6.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "large"
+//   },
+//   { 
+//     id: 7, 
+//     image: "/event-img/wedd-event7.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+//   { 
+//     id: 8, 
+//     image: "/event-img/wedd-event8.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "medium"
+//   },
+//   { 
+//     id: 9, 
+//     image: "/event-img/wedd-event9.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+//   { 
+//     id: 10, 
+//     image: "/event-img/wedd-event10.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "small"
+//   },
+//   { 
+//     id: 11, 
+//     image: "/event-img/wedd-event11.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
   
   
 
-];
+// ];
 
 export const bannerConfig = {
-  backgroundImage: "/printout-img/printout1.jpg",
-  badge: "Printout",
+  backgroundImage: "/event-img/bannerr.jpg",
+  badge: "Professional Photography",
   title: " Printout",
-  description: "Professional photo printouts bringing your cherished moments to life."
+  description: "Explore our collection — where every smile, spark, and story comes alive."
 };
 
 export const breadcrumbItems = [
@@ -93,3 +93,5 @@ export const breadcrumbItems = [
   { label: "Service", href: "/services" },
   { label: "All Photos", href: "#", active: true }
 ];
+
+export const SERVICE_KEY = "printout";

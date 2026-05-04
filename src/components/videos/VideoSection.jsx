@@ -1,284 +1,33 @@
-import React, {useEffect, useState, useRef } from 'react';
-import { Play, Clock, Eye, Star, Award, Zap, Heart, TrendingUp, Users, Camera, Aperture, Image } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Play, Star, Award, Zap, Heart, Users, Camera, Aperture } from 'lucide-react';
 import CTA from "../CTA";
 
 const VideoSection = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [liked, setLiked] = useState({});
   const [activeCategory, setActiveCategory] = useState('All');
+  const [allVideos, setAllVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
   const videoRefs = useRef({});
-  
 
-  // First Set - Wedding Photography
-  const weddingVideos = [
-    {
-      id: 1,
-      title: "Portrait Photography Masterclass",
-      duration: "12:45",
-      views: "2.4M",
-      thumbnail: "/thumbnails/th2.jpg",
-      videoUrl: "/videosection/videos.mp4",
-      category: "Portraits",
-      rating: 4.9,
-      featured: true
-    },
-    {
-      id: 2,
-      title: "Studio Lighting Techniques",
-      duration: "8:30",
-      views: "1.8M",
-      thumbnail: "/thumbnails/th7.jpg",
-      videoUrl: "/videosection/videos3.mp4",
-      category: "Lighting",
-      rating: 4.7
-    },
-    {
-      id: 3,
-      title: "Professional Editing Workflow",
-      duration: "15:20",
-      views: "3.2M",
-      thumbnail: "/thumbnails/th10.jpg",
-      videoUrl: "/videosection/videos4.mp4",
-      category: "Editing",
-      rating: 4.8,
-      trending: true
-    },
-    {
-      id: 4,
-      title: "Product Photography Secrets",
-      duration: "10:15",
-      views: "2.1M",
-      thumbnail: "/thumbnails/th1.jpg",
-      videoUrl: "/videosection/videos1.mp4",
-      category: "Wedding",
-      rating: 4.6
-    },
-    {
-      id: 5,
-      title: "Fashion Photography Guide",
-      duration: "18:40",
-      views: "4.5M",
-      thumbnail: "/thumbnails/th9.jpg",
-      videoUrl: "/videosection/videos5.mp4",
-      category: "Wedding",
-      rating: 5.0,
-      featured: true
-    },
-    {
-      id: 6,
-      title: "Composition & Framing",
-      duration: "14:25",
-      views: "1.9M",
-      thumbnail: "/thumbnails/th8.jpg",
-      videoUrl: "/videosection/videos6.mp4",
-      category: "Wedding",
-      rating: 4.5
-    }
-  ];
+  useEffect(() => {
+    fetch('http://localhost:5000/api/videos')
+      .then(res => res.json())
+      .then(data => {
+        setAllVideos(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching videos:', err);
+        setLoading(false);
+      });
+  }, []);
 
-  // Second Set - Portrait Photography
-  const portraitVideos = [
-    {
-      id: 7,
-      title: "Natural Light Portraits",
-      duration: "9:20",
-      views: "1.5M",
-      thumbnail: "/thumbnails/th11.jpg",
-      videoUrl: "/videosection/videos7.mp4",
-      category: "Portraits",
-      rating: 4.8,
-      featured: true
-    },
-    {
-      id: 8,
-      title: "Posing Techniques Guide",
-      duration: "11:35",
-      views: "2.2M",
-      thumbnail: "/thumbnails/th14.jpg",
-      videoUrl: "/videosection/videos8.mp4",
-      category: "Portraits",
-      rating: 4.7
-    },
-    {
-      id: 9,
-      title: "Black & White Portraiture",
-      duration: "13:45",
-      views: "1.8M",
-      thumbnail: "/thumbnails/th13.jpg",
-      videoUrl: "/videosection/videos9.mp4",
-      category: "Portraits",
-      rating: 4.9,
-      trending: true
-    },
-    {
-      id: 10,
-      title: "Environmental Portraits",
-      duration: "16:10",
-      views: "1.3M",
-      thumbnail: "/thumbnails/th12.jpg",
-      videoUrl: "/videosection/videos10.mp4",
-      category: "Portraits",
-      rating: 4.6
-    },
-    {
-      id: 11,
-      title: "Family Portrait Session",
-      duration: "14:30",
-      views: "2.7M",
-      thumbnail: "/thumbnails/th6.jpg",
-      videoUrl: "/videosection/videos11.mp4",
-      category: "Portraits",
-      rating: 4.8
-    },
-    {
-      id: 12,
-      title: "Creative Portrait Lighting",
-      duration: "12:15",
-      views: "1.9M",
-      thumbnail: "/thumbnails/th5.jpg",
-      videoUrl: "/videosection/videos12.mp4",
-      category: "Portraits",
-      rating: 4.7
-    }
-  ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  // Third Set - Fashion Photography
-  const fashionVideos = [
-    {
-      id: 13,
-      title: "Runway Photography Tips",
-      duration: "8:45",
-      views: "1.6M",
-      thumbnail: "/fashion-img/fashion1.jpg",
-      videoUrl: "/videosection/videos13.mp4",
-      category: "Fashion",
-      rating: 4.7
-    },
-    {
-      id: 14,
-      title: "Editorial Fashion Shoots",
-      duration: "15:20",
-      views: "2.3M",
-      thumbnail: "/fashion-img/fashion2.jpg",
-      videoUrl: "/videosection/videos14.mp4",
-      category: "Fashion",
-      rating: 4.9,
-      featured: true
-    },
-    {
-      id: 15,
-      title: "Beauty Photography",
-      duration: "10:30",
-      views: "1.4M",
-      thumbnail: "/fashion-img/fashion3.jpg",
-      videoUrl: "/videosection/videos15.mp4",
-      category: "Fashion",
-      rating: 4.6
-    },
-    {
-      id: 16,
-      title: "Street Style Photography",
-      duration: "12:45",
-      views: "2.1M",
-      thumbnail: "/fashion-img/fashion4.jpg",
-      videoUrl: "/videosection/videos16.mp4",
-      category: "Fashion",
-      rating: 4.8,
-      trending: true
-    },
-    {
-      id: 17,
-      title: "Model Direction Techniques",
-      duration: "14:15",
-      views: "1.7M",
-      thumbnail: "/fashion-img/fashion5.jpg",
-      videoUrl: "/videosection/videos17.mp4",
-      category: "Fashion",
-      rating: 4.7
-    },
-    {
-      id: 18,
-      title: "High Fashion Lighting",
-      duration: "11:50",
-      views: "2.0M",
-      thumbnail: "/fashion-img/fashion6.jpg",
-      videoUrl: "/videosection/videos18.mp4",
-      category: "Fashion",
-      rating: 4.9
-    }
-  ];
-
-  // Fourth Set - Landscape Photography
-  const landscapeVideos = [
-    {
-      id: 19,
-      title: "Golden Hour Landscapes",
-      duration: "13:20",
-      views: "2.8M",
-      thumbnail: "/landscape-img/landscape1.jpg",
-      videoUrl: "/videosection/videos19.mp4",
-      category: "Landscape",
-      rating: 4.9,
-      featured: true
-    },
-    {
-      id: 20,
-      title: "Long Exposure Water",
-      duration: "16:45",
-      views: "1.9M",
-      thumbnail: "/landscape-img/landscape2.jpg",
-      videoUrl: "/videosection/videos20.mp4",
-      category: "Landscape",
-      rating: 4.8
-    },
-    {
-      id: 21,
-      title: "Mountain Photography",
-      duration: "14:30",
-      views: "2.2M",
-      thumbnail: "/landscape-img/landscape3.jpg",
-      videoUrl: "/videosection/videos21.mp4",
-      category: "Landscape",
-      rating: 4.7,
-      trending: true
-    },
-    {
-      id: 22,
-      title: "Seascape Techniques",
-      duration: "11:15",
-      views: "1.6M",
-      thumbnail: "/landscape-img/landscape4.jpg",
-      videoUrl: "/videosection/videos22.mp4",
-      category: "Landscape",
-      rating: 4.6
-    },
-    {
-      id: 23,
-      title: "Urban Landscape Photography",
-      duration: "12:40",
-      views: "2.1M",
-      thumbnail: "/landscape-img/landscape5.jpg",
-      videoUrl: "/videosection/videos23.mp4",
-      category: "Landscape",
-      rating: 4.8
-    },
-    {
-      id: 24,
-      title: "Night Sky Photography",
-      duration: "18:20",
-      views: "3.2M",
-      thumbnail: "/landscape-img/landscape6.jpg",
-      videoUrl: "/videosection/videos24.mp4",
-      category: "Landscape",
-      rating: 5.0,
-      featured: true
-    }
-  ];
-
-  // Combine all videos
-  const allVideos = [...weddingVideos, ...portraitVideos, ...fashionVideos, ...landscapeVideos];
-
-  const categories = ['All','Wedding'];
+  const categories = ['All', ...new Set(allVideos.map(v => v.category).filter(Boolean))];
 
   const toggleLike = (id) => {
     setLiked(prev => ({ ...prev, [id]: !prev[id] }));
@@ -286,132 +35,229 @@ const VideoSection = () => {
 
   const handleMouseEnter = (videoId) => {
     setHoveredCard(videoId);
-    const videoElement = videoRefs.current[videoId];
-    if (videoElement) {
-      videoElement.play().catch(error => {
-        console.log('Auto-play prevented:', error);
-      });
-    }
+    const el = videoRefs.current[videoId];
+    if (el) el.play().catch(() => {});
   };
 
   const handleMouseLeave = (videoId) => {
     setHoveredCard(null);
-    const videoElement = videoRefs.current[videoId];
-    if (videoElement) {
-      videoElement.pause();
-      videoElement.currentTime = 0;
-    }
+    const el = videoRefs.current[videoId];
+    if (el) { el.pause(); el.currentTime = 0; }
   };
 
-  const filteredVideos = activeCategory === 'All' 
-    ? allVideos 
+  const filteredVideos = activeCategory === 'All'
+    ? allVideos
     : allVideos.filter(v => v.category === activeCategory);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const handleScroll = () => setOffsetY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  /* ── Small / Medium Card ── */
+  const VideoCard = ({ video, height = 'h-56', showFeatured = false }) => (
+    <div
+      className="group relative w-full"
+      onMouseEnter={() => handleMouseEnter(video.id)}
+      onMouseLeave={() => handleMouseLeave(video.id)}
+    >
+      <div className="relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
+        <div className={`relative overflow-hidden ${height}`}>
+          <video
+            ref={el => videoRefs.current[video.id] = el}
+            src={`http://localhost:5000${video.videoUrl}`}
+            muted loop preload="metadata"
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${hoveredCard === video.id ? 'opacity-100 scale-105' : 'opacity-0'}`}
+          />
+          <img
+            src={video.thumbnail ? `http://localhost:5000${video.thumbnail}` : '/thumbnails/default.jpg'}
+            alt={video.title}
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${hoveredCard === video.id ? 'opacity-0 scale-105' : 'opacity-100'}`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+
+          {/* Play Button */}
+          <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-400 ${hoveredCard === video.id ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+            <div className="bg-white/90 backdrop-blur-sm rounded-full p-4 shadow-xl hover:scale-110 transition-transform cursor-pointer">
+              <Play className="text-red-900" size={22} fill="currentColor" />
+            </div>
+          </div>
+
+          {/* Badges */}
+          {showFeatured && video.featured && !video.trending && (
+            <div className="absolute top-3 left-3 bg-red-900 text-white px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center gap-1 shadow">
+              <Award size={10} /> FEATURED
+            </div>
+          )}
+          {video.trending && (
+            <div className="absolute top-3 left-3 bg-amber-500 text-white px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center gap-1 animate-pulse shadow">
+              <Zap size={10} /> TRENDING
+            </div>
+          )}
+
+          {/* Like */}
+          <button
+            onClick={() => toggleLike(video.id)}
+            className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all hover:scale-110 shadow"
+          >
+            <Heart size={16} className={liked[video.id] ? 'text-red-700 fill-red-700' : 'text-gray-500'} />
+          </button>
+
+          {/* Info */}
+          <div className="absolute bottom-3 left-3 right-10">
+            <span className="text-red-400 text-[10px] font-bold tracking-widest uppercase mb-0.5 block">{video.category}</span>
+            <h3 className="text-white font-bold text-base leading-snug line-clamp-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+              {video.title}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  /* ── Featured Hero Card ── */
+  const FeaturedCard = ({ video }) => (
+    <div
+      className="w-full group relative"
+      onMouseEnter={() => handleMouseEnter(video.id)}
+      onMouseLeave={() => handleMouseLeave(video.id)}
+    >
+      <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 h-full">
+        <div className="relative overflow-hidden h-72 sm:h-96 lg:h-[420px]">
+          <video
+            ref={el => videoRefs.current[video.id] = el}
+            src={`http://localhost:5000${video.videoUrl}`}
+            muted loop preload="metadata"
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${hoveredCard === video.id ? 'opacity-100 scale-105' : 'opacity-0'}`}
+          />
+          <img
+            src={video.thumbnail ? `http://localhost:5000${video.thumbnail}` : '/thumbnails/default.jpg'}
+            alt={video.title}
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${hoveredCard === video.id ? 'opacity-0 scale-105' : 'opacity-100'}`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+
+          {/* Big Play */}
+          <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${hoveredCard === video.id ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+            <div className="relative">
+              <div className="absolute inset-0 bg-red-800 rounded-full animate-ping opacity-40" />
+              <div className="relative bg-red-900 rounded-full p-7 sm:p-9 shadow-2xl hover:bg-red-800 cursor-pointer transition-transform hover:scale-110">
+                <Play className="text-white" size={36} fill="white" />
+              </div>
+            </div>
+          </div>
+
+          {/* Featured Badge */}
+          <div className="absolute top-5 left-5">
+            <div className="bg-red-900 text-white px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-xl">
+              <Award size={13} /> FEATURED
+            </div>
+          </div>
+
+          {/* Like */}
+          <button
+            onClick={() => toggleLike(video.id)}
+            className="absolute top-5 right-5 bg-white/20 backdrop-blur-md p-3 rounded-full shadow-lg hover:bg-white/35 transition-all hover:scale-110"
+          >
+            <Heart size={22} className={liked[video.id] ? 'text-red-400 fill-red-400' : 'text-white'} />
+          </button>
+
+          {/* Info */}
+          <div className="absolute bottom-5 left-5 right-5">
+            <span className="text-red-400 text-[11px] font-bold tracking-widest uppercase mb-1.5 flex items-center gap-1.5">
+              <Camera size={12} /> {video.category}
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-bold text-white leading-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
+              {video.title}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-red-50/30 to-gray-100 relative overflow-hidden">
-      {/* Photo Studio Header */}
-      <header className="relative h-[60vh] sm:h-[80vh] flex items-center justify-center text-center overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-red-50/20 to-gray-100 relative overflow-hidden">
+
+      {/* ── Decorative blobs ── */}
+      <div className="pointer-events-none fixed top-20 left-10 w-72 h-72 bg-red-200/20 rounded-full blur-3xl animate-pulse" />
+      <div className="pointer-events-none fixed bottom-40 right-20 w-96 h-96 bg-red-300/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.2s' }} />
+
+      {/* ── Banner ── */}
+      <header className="relative h-[55vh] sm:h-[70vh] flex items-center justify-center text-center overflow-hidden">
         <img
           src="/video-banner2.jpg"
           alt="Photo Studio Banner"
           className="absolute inset-0 w-full h-full object-cover animate-zoom"
         />
-        {/* Black Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
-        
-        {/* Studio Lights Effect */}
-        <div className="absolute top-0 left-1/4 w-32 h-32 bg-red-200 rounded-full blur-3xl opacity-40 animate-pulse" />
-        <div className="absolute top-0 right-1/4 w-48 h-48 bg-red-300 rounded-full blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-0 left-1/2 w-40 h-40 bg-red-100 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }} />
-        
-        <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-40 md:py-45">
-          {/* <div className="inline-flex items-center gap-3  backdrop-blur-xl px-6 py-3 rounded-full mb-6 border border-white/10">
-            <Camera className="text-white" size={20} />
-            <span className="text-white font-bold text-sm tracking-widest" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              PROFESSIONAL PHOTO STUDIO
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+
+        <div className="relative z-10 px-4 sm:px-8 max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 rounded-full mb-5">
+            <Aperture size={14} className="text-red-400" />
+            <span className="text-white/80 text-xs tracking-widest font-semibold uppercase" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              Studio Mastery
             </span>
-          </div> */}
-          
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-white">
+          </div>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4 text-white leading-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
             Capture Perfect Moments
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-200">
-            Master the art of photography with professional techniques and studio secrets across all genres
+          <p className="text-base sm:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+            Master the art of photography with professional techniques and studio secrets
           </p>
         </div>
       </header>
 
-      {/* Animated Background Shapes */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-red-200/20 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-40 right-20 w-96 h-96 bg-red-300/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-red-100/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-      
-      <div className="relative py-16 px-4 sm:px-6 lg:px-8">
-        {/* Compact Hero with Side Stats */}
-        <div className="max-w-7xl mx-auto mb-16">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-            {/* Left: Title */}
-            <div className="flex-1 text-left">
-              <div className="inline-flex items-center gap-2 bg-red-900 px-4 py-2 rounded-full mb-4">
-                <Aperture className="text-white" size={18} />
-                <span className="text-white font-bold text-xs tracking-widest" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+      {/* ── Main Content ── */}
+      <div className="relative py-12 px-4 sm:px-6 lg:px-10 xl:px-16">
+        <div className="max-w-7xl mx-auto">
+
+          {/* ── Header + Stats ── */}
+          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 mb-12">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 bg-red-900 px-4 py-1.5 rounded-full mb-4">
+                <Aperture className="text-white" size={15} />
+                <span className="text-white font-bold text-[11px] tracking-widest" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                   STUDIO MASTERY
                 </span>
               </div>
-              
-              <h1 className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-900 via-red-900 to-red-900 mb-4" 
-                  style={{ fontFamily: 'Playfair Display, serif', lineHeight: '1.1' }}>
-                Beauty captured <br /> <span className='bg-black bg-clip-text text-transparent'>through motion</span>
-              </h1>
-              
-              <p className="text-lg text-gray-600 max-w-lg leading-relaxed" 
-                 style={{ fontFamily: 'Inter, sans-serif' }}>
-                Professional photography techniques across wedding, portrait, fashion, and landscape genres from industry experts
+              <h2
+                className="text-4xl sm:text-5xl lg:text-6xl font-black text-red-900 leading-tight mb-3"
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
+                Beauty captured
+                <br />
+                <span className="text-gray-900">through motion</span>
+              </h2>
+              <p className="text-gray-500 text-base max-w-md leading-relaxed">
+                Professional photography techniques from industry experts
               </p>
             </div>
 
-            {/* Right: Stats Cards */}
-            <div className="flex gap-4">
-              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-red-100 hover:shadow-xl transition-all hover:scale-105">
-                <div className="text-4xl font-black text-red-900 mb-1" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                  200+
+            {/* Stats */}
+            <div className="flex gap-3 sm:gap-4 flex-shrink-0">
+              {[
+                { value: `${allVideos.length}+`, label: 'Videos', icon: <Users size={13} /> },
+                { value: '4.8★', label: 'Avg Rating', icon: <Star size={13} /> },
+              ].map(({ value, label, icon }) => (
+                <div
+                  key={label}
+                  className="bg-white/80 backdrop-blur-sm px-5 py-4 sm:px-6 sm:py-5 rounded-2xl shadow border border-red-100 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                >
+                  <div className="text-3xl sm:text-4xl font-black text-red-900 mb-0.5" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    {value}
+                  </div>
+                  <div className="text-xs text-gray-500 font-medium flex items-center gap-1">{icon}{label}</div>
                 </div>
-                <div className="text-sm text-gray-600 font-medium flex items-center gap-1">
-                  <Users size={14} />
-                  Tutorials
-                </div>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-red-100 hover:shadow-xl transition-all hover:scale-105">
-                <div className="text-4xl font-black text-red-900 mb-1" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                  4.8★
-                </div>
-                <div className="text-sm text-gray-600 font-medium flex items-center gap-1">
-                  <Star size={14} />
-                  Avg Rating
-                </div>
-              </div>
+              ))}
             </div>
           </div>
-        </div>
 
-        {/* Photography Categories */}
-        <div className="max-w-7xl mx-auto mb-12">
-          <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
+          {/* ── Category Filter ── */}
+          <div className="flex gap-2 overflow-x-auto pb-3 mb-10 scrollbar-hide">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-3 rounded-full ml-1 mt-1 font-bold text-sm whitespace-nowrap transition-all duration-300 ${
+                className={`px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
                   activeCategory === cat
                     ? 'bg-red-900 text-white shadow-lg scale-105'
-                    : 'bg-white/60 backdrop-blur-sm text-gray-700 hover:bg-white hover:shadow-md'
+                    : 'bg-white/70 backdrop-blur-sm text-gray-600 hover:bg-white hover:shadow-md'
                 }`}
                 style={{ fontFamily: 'Montserrat, sans-serif' }}
               >
@@ -419,363 +265,85 @@ const VideoSection = () => {
               </button>
             ))}
           </div>
-        </div>
 
-        {/* Masonry-style Grid Layout */}
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            {/* Featured Large Card - Spans 8 columns */}
-            {filteredVideos.slice(0, 1).map((video) => (
-              <div
-                key={video.id}
-                className="md:col-span-8 group relative"
-                onMouseEnter={() => handleMouseEnter(video.id)}
-                onMouseLeave={() => handleMouseLeave(video.id)}
-              >
-                <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-red-900/20 transition-all duration-500 h-full">
-                  <div className="relative overflow-hidden h-105">
-                    {/* Video Element */}
-                    <video
-                      ref={el => videoRefs.current[video.id] = el}
-                      src={video.videoUrl}
-                      muted
-                      loop
-                      preload="metadata"
-                      className={`w-full h-full object-cover transition-all duration-700 ${
-                        hoveredCard === video.id ? 'opacity-100 scale-110' : 'opacity-0 absolute'
-                      }`}
-                    />
-                    
-                    {/* Thumbnail Fallback */}
-                    <img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      className={`w-full h-full object-cover transition-all duration-700 ${
-                        hoveredCard === video.id ? 'opacity-0 scale-110' : 'opacity-100'
-                      }`}
-                    />
-                    
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                    
-                    {/* Play Button Overlay */}
-                    <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-                      hoveredCard === video.id ? 'opacity-0' : 'opacity-100'
-                    }`}>
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-red-900 rounded-full animate-ping opacity-50" />
-                        <div className="relative bg-red-900 rounded-full p-10 shadow-2xl hover:bg-red-800 cursor-pointer transition-transform hover:scale-110">
-                          <Play className="text-white" size={48} fill="white" />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="absolute top-6 left-6 flex gap-2">
-                      <div className="bg-red-900 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl" 
-                           style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                        <Award size={16} />
-                        FEATURED
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => toggleLike(video.id)}
-                      className="absolute top-6 right-6 bg-white/20 backdrop-blur-md p-3 rounded-full shadow-lg hover:bg-white/30 transition-all hover:scale-110"
-                    >
-                      <Heart 
-                        size={24} 
-                        className={liked[video.id] ? 'text-red-500 fill-red-500' : 'text-white'}
-                      />
-                    </button>
-
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <span className="text-red-400 text-xs font-bold tracking-widest uppercase mb-2 block flex items-center gap-2" 
-                            style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                        <Camera size={14} />
-                        {video.category}
-                      </span>
-                      <h3 className="text-3xl font-bold text-white mb-3" 
-                          style={{ fontFamily: 'Playfair Display, serif' }}>
-                        {video.title}
-                      </h3>
-                    
-                    </div>
-                  </div>
-                </div>
+          {/* ── Loading ── */}
+          {loading && (
+            <div className="text-center py-24">
+              <div className="inline-flex gap-1.5">
+                {[0, 0.15, 0.3].map((d, i) => (
+                  <span key={i} className="w-2.5 h-2.5 bg-red-900 rounded-full animate-bounce" style={{ animationDelay: `${d}s` }} />
+                ))}
               </div>
-            ))}
-
-            {/* Sidebar Cards - Spans 4 columns */}
-            <div className="md:col-span-4 flex flex-col gap-6">
-              {filteredVideos.slice(1, 3).map((video) => (
-                <div
-                  key={video.id}
-                  className="group relative"
-                  onMouseEnter={() => handleMouseEnter(video.id)}
-                  onMouseLeave={() => handleMouseLeave(video.id)}
-                >
-                  <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
-                    <div className="relative overflow-hidden h-48">
-                      {/* Video Element */}
-                      <video
-                        ref={el => videoRefs.current[video.id] = el}
-                        src={video.videoUrl}
-                        muted
-                        loop
-                        preload="metadata"
-                        className={`w-full h-full object-cover transition-all duration-700 ${
-                          hoveredCard === video.id ? 'opacity-100 scale-110' : 'opacity-0 absolute'
-                        }`}
-                      />
-                      
-                      {/* Thumbnail Fallback */}
-                      <img
-                        src={video.thumbnail}
-                        alt={video.title}
-                        className={`w-full h-full object-cover transition-all duration-700 ${
-                          hoveredCard === video.id ? 'opacity-0 scale-110' : 'opacity-100'
-                        }`}
-                      />
-                      
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                      
-                      {video.trending && (
-                        <div className="absolute top-3 left-3 bg-red-900 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 animate-pulse">
-                          <Zap size={12} />
-                          TRENDING
-                        </div>
-                      )}
-
-                      <button
-                        onClick={() => toggleLike(video.id)}
-                        className="absolute top-3 right-3 bg-white/20 backdrop-blur-md p-2 rounded-full hover:bg-white/30 transition-all hover:scale-110"
-                      >
-                        <Heart 
-                          size={18} 
-                          className={liked[video.id] ? 'text-red-500 fill-red-500' : 'text-white'}
-                        />
-                      </button>
-
-                      <div className="absolute bottom-3 left-3 right-3">
-                        <h4 className="text-lg font-bold text-white mb-1" 
-                            style={{ fontFamily: 'Playfair Display, serif' }}>
-                          {video.title}
-                        </h4>
-                     
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              <p className="text-gray-400 mt-3 text-sm">Loading videos...</p>
             </div>
+          )}
 
-            {/* Bottom Row - 3 Equal Cards */}
-            {filteredVideos.slice(3, 6).map((video) => (
-              <div
-                key={video.id}
-                className="md:col-span-4 group relative"
-                onMouseEnter={() => handleMouseEnter(video.id)}
-                onMouseLeave={() => handleMouseLeave(video.id)}
-              >
-                <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
-                  <div className="relative overflow-hidden h-56">
-                    {/* Video Element */}
-                    <video
-                      ref={el => videoRefs.current[video.id] = el}
-                      src={video.videoUrl}
-                      muted
-                      loop
-                      preload="metadata"
-                      className={`w-full h-full object-cover transition-all duration-700 ${
-                        hoveredCard === video.id ? 'opacity-100 scale-110' : 'opacity-0 absolute'
-                      }`}
-                    />
-                    
-                    {/* Thumbnail Fallback */}
-                    <img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      className={`w-full h-full object-cover transition-all duration-700 ${
-                        hoveredCard === video.id ? 'opacity-0 scale-110' : 'opacity-100'
-                      }`}
-                    />
-                    
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/20 transition-colors duration-500" />
-                    
-                    {/* Play Button */}
-                    <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-                      hoveredCard === video.id ? 'opacity-0' : 'opacity-100'
-                    }`}>
-                      <div className="bg-white rounded-full p-5 shadow-2xl cursor-pointer hover:scale-110 transition-transform">
-                        <Play className="text-red-900" size={28} fill="currentColor" />
-                      </div>
-                    </div>
+          {/* ── Empty ── */}
+          {!loading && filteredVideos.length === 0 && (
+            <div className="text-center py-24">
+              <p className="text-gray-400 text-lg">No videos in this category</p>
+            </div>
+          )}
 
-                    {video.featured && (
-                      <div className="absolute top-3 left-3 bg-red-900 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
-                        <Award size={12} />
-                        FEATURED
-                      </div>
-                    )}
+          {/* ── Videos Grid ── */}
+          {!loading && filteredVideos.length > 0 && (
+            <div className="space-y-6">
 
-                    <button
-                      onClick={() => toggleLike(video.id)}
-                      className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all hover:scale-110"
-                    >
-                      <Heart 
-                        size={18} 
-                        className={liked[video.id] ? 'text-red-900 fill-red-900' : 'text-gray-600'}
-                      />
-                    </button>
-                  </div>
-
-                  <div className="p-5 flex-1 flex flex-col">
-                    <span className="text-red-900 text-xs font-bold tracking-widest uppercase mb-2 flex items-center gap-2" 
-                          style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      <Image size={14} />
-                      {video.category}
-                    </span>
-                    
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-900 transition-colors flex-1" 
-                        style={{ fontFamily: 'Playfair Display, serif' }}>
-                      {video.title}
-                    </h3>
-
-                  </div>
+              {/* Row 1: Featured + 2 side cards */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div className="lg:col-span-8">
+                  {filteredVideos[0] && <FeaturedCard video={filteredVideos[0]} />}
                 </div>
-              </div>
-            ))}
-
-            {/* Additional Rows for More Videos */}
-            {filteredVideos.length > 6 && (
-              <>
-                {/* Second Row */}
-                <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                  {filteredVideos.slice(6, 9).map((video) => (
-                    <div
-                      key={video.id}
-                      className="group relative"
-                      onMouseEnter={() => handleMouseEnter(video.id)}
-                      onMouseLeave={() => handleMouseLeave(video.id)}
-                    >
-                      <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
-                        <div className="relative overflow-hidden h-56">
-                          <video
-                            ref={el => videoRefs.current[video.id] = el}
-                            src={video.videoUrl}
-                            muted
-                            loop
-                            preload="metadata"
-                            className={`w-full h-full object-cover transition-all duration-700 ${
-                              hoveredCard === video.id ? 'opacity-100 scale-110' : 'opacity-0 absolute'
-                            }`}
-                          />
-                          <img
-                            src={video.thumbnail}
-                            alt={video.title}
-                            className={`w-full h-full object-cover transition-all duration-700 ${
-                              hoveredCard === video.id ? 'opacity-0 scale-110' : 'opacity-100'
-                            }`}
-                          />
-                          <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-                            hoveredCard === video.id ? 'opacity-0' : 'opacity-100'
-                          }`}>
-                            <div className="bg-white rounded-full p-4 shadow-2xl cursor-pointer hover:scale-110 transition-transform">
-                              <Play className="text-red-900" size={20} fill="currentColor" />
-                            </div>
-                          </div>
-                        </div>
-                          <button
-                      onClick={() => toggleLike(video.id)}
-                      className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all hover:scale-110"
-                    >
-                      <Heart 
-                        size={18} 
-                        className={liked[video.id] ? 'text-red-900 fill-red-900' : 'text-gray-600'}
-                      />
-                    </button>
-                        <div className="p-5 flex-1 flex flex-col">
-                          <h3 className="text-lg font-bold text-gray-900 mb-2">{video.title}</h3>
-                        
-                        </div>
-                      </div>
+                <div className="lg:col-span-4 flex flex-row lg:flex-col gap-4 sm:gap-6">
+                  {filteredVideos.slice(1, 3).map(video => (
+                    <div key={video.id} className="flex-1 min-w-0">
+                      <VideoCard video={video} height="h-40 sm:h-48 lg:h-[192px]" />
                     </div>
                   ))}
                 </div>
+              </div>
 
-                {/* Third Row */}
-                {filteredVideos.length > 9 && (
-                  <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                    {filteredVideos.slice(9, 12).map((video) => (
-                      <div
-                        key={video.id}
-                        className="group relative"
-                        onMouseEnter={() => handleMouseEnter(video.id)}
-                        onMouseLeave={() => handleMouseLeave(video.id)}
-                      >
-                        <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
-                          <div className="relative overflow-hidden h-56">
-                            <video
-                              ref={el => videoRefs.current[video.id] = el}
-                              src={video.videoUrl}
-                              muted
-                              loop
-                              preload="metadata"
-                              className={`w-full h-full object-cover transition-all duration-700 ${
-                                hoveredCard === video.id ? 'opacity-100 scale-110' : 'opacity-0 absolute'
-                              }`}
-                            />
-                            <img
-                              src={video.thumbnail}
-                              alt={video.title}
-                              className={`w-full h-full object-cover transition-all duration-700 ${
-                                hoveredCard === video.id ? 'opacity-0 scale-110' : 'opacity-100'
-                              }`}
-                            />
-                            <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-                              hoveredCard === video.id ? 'opacity-0' : 'opacity-100'
-                            }`}>
-                              <div className="bg-white rounded-full p-4 shadow-2xl cursor-pointer hover:scale-110 transition-transform">
-                                <Play className="text-red-900" size={20} fill="currentColor" />
-                              </div>
-                            </div>
-                          </div>
-                            <button
-                      onClick={() => toggleLike(video.id)}
-                      className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all hover:scale-110"
-                    >
-                      <Heart 
-                        size={18} 
-                        className={liked[video.id] ? 'text-red-900 fill-red-900' : 'text-gray-600'}
-                      />
-                    </button>
-                          <div className="p-5 flex-1 flex flex-col">
-                            <h3 className="text-lg font-bold text-gray-900 mb-2">{video.title}</h3>
-                          
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
+              {/* Row 2: 3-column grid */}
+              {filteredVideos.length > 3 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                  {filteredVideos.slice(3, 6).map(video => (
+                    <VideoCard key={video.id} video={video} height="h-56" showFeatured />
+                  ))}
+                </div>
+              )}
+
+              {/* Extra rows */}
+              {filteredVideos.length > 6 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                  {filteredVideos.slice(6).map(video => (
+                    <VideoCard key={video.id} video={video} height="h-56" />
+                  ))}
+                </div>
+              )}
+
+            </div>
+          )}
+
+          {/* ── CTA ── */}
+          <div className="mt-16">
+            <CTA />
           </div>
         </div>
-        <div className='mt-4'>
-   <CTA/>
-        </div>
-     
-       
       </div>
-      
+
       <style>{`
         @keyframes zoom {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.05); }
-          100% { transform: scale(1); }
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.06); }
         }
-        .animate-zoom {
-          animation: zoom 15s infinite ease-in-out;
+        .animate-zoom { animation: zoom 16s ease-in-out infinite; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       `}</style>
     </div>

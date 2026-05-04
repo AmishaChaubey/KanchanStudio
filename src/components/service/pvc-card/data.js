@@ -1,91 +1,91 @@
-export const galleryItems = [
-  { 
-    id: 1, 
-    image: "/pvc-img/pvc1.jpg", 
-    title: "PVC Card", 
-    category: "portrait",
-    size: "large"
-  },
-  { 
-    id: 2, 
-    image: "/pvc-img/pvc2.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "small"
-  },
-  { 
-    id: 3, 
-    image: "/pvc-img/pvc3.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "small"
-  },
-  { 
-    id: 4, 
-    image: "/pvc-img/pvc4.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "medium"
-  },
-  { 
-    id: 5, 
-    image: "/pvc-img/pvc5.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "medium"
-  },
-  { 
-    id: 6, 
-    image: "/pvc-img/pvc6.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "large"
-  },
-  { 
-    id: 7, 
-    image: "/pvc-img/pvc7.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "small"
-  },
-  { 
-    id: 8, 
-    image: "/pvc-img/pvc8.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "medium"
-  },
-  { 
-    id: 9, 
-    image:"/pvc-img/pvc9.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "small"
-  },
-  { 
-    id: 10, 
-    image: "/pvc-img/pvc10.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "small"
-  },
-  { 
-    id: 11, 
-    image: "/pvc-img/pvc11.jpg", 
-    title: "PVC Card", 
-    category: "Cards",
-    size: "small"
-  },
+// export const galleryItems = [
+//   { 
+//     id: 1, 
+//     image: "/event-img/wedd-event.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "large"
+//   },
+//   { 
+//     id: 2, 
+//     image: "/event-img/wedd-event2.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+//   { 
+//     id: 3, 
+//     image: "/event-img/wedd-event3.jpg", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "small"
+//   },
+//   { 
+//     id: 4, 
+//     image: "/event-img/wedd-event4.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "medium"
+//   },
+//   { 
+//     id: 5, 
+//     image: "/event-img/wedd-event5.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "medium"
+//   },
+//   { 
+//     id: 6, 
+//     image: "/event-img/wedd-event6.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "large"
+//   },
+//   { 
+//     id: 7, 
+//     image: "/event-img/wedd-event7.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+//   { 
+//     id: 8, 
+//     image: "/event-img/wedd-event8.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "medium"
+//   },
+//   { 
+//     id: 9, 
+//     image: "/event-img/wedd-event9.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
+//   { 
+//     id: 10, 
+//     image: "/event-img/wedd-event10.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "fashion",
+//     size: "small"
+//   },
+//   { 
+//     id: 11, 
+//     image: "/event-img/wedd-event11.jfif", 
+//     title: "Wedding event shoot", 
+//     category: "portrait",
+//     size: "small"
+//   },
   
   
 
-];
+// ];
 
 export const bannerConfig = {
-  backgroundImage: "/pvc-img/pvc11.jpg",
-  badge: "PVC Cards",
-  title: " PVC Cards",
-  description: "High-quality PVC cards that attract attention and drive sales."
+  backgroundImage: "/event-img/bannerr.jpg",
+  badge: "Professional Photography",
+  title: " PVC Card",
+  description: "Explore our collection — where every smile, spark, and story comes alive."
 };
 
 export const breadcrumbItems = [
@@ -93,3 +93,5 @@ export const breadcrumbItems = [
   { label: "Service", href: "/services" },
   { label: "All Photos", href: "#", active: true }
 ];
+
+export const SERVICE_KEY = "pvc-card";

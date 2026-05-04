@@ -1,5 +1,6 @@
 import React from "react";
-import CardSwap, { Card } from "./CardSwap";
+import CardSwap, { Card } from "./CardSwap"; 
+import { Link } from "react-router-dom";
 
 export default function AboutJourney() {
   return (
@@ -25,18 +26,18 @@ export default function AboutJourney() {
         <p className="text-gray-600 text-lg md:text-xl">
           Kanchan Studio is a creative hub for professional photography and videography. We specialize in weddings, portraits, and commercial projects.
         </p>
-        <button className="bg-red-900 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 w-max mx-auto md:mx-0">
+       <Link to="/contact"><button className="bg-red-900 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 w-max mx-auto md:mx-0">
           Book a Session
-        </button>
+        </button></Link>
       </div>
 
       {/* Right Card Swap */}
       <div className="md:w-1/2 flex items-center justify-center px-4 md:px-8 z-10 py-16 md:py-0">
         <CardSwap width={600} height={800} cardDistance={60} verticalDistance={50}>
-          <Card customClass="shadow-2xl rounded-2xl bg-cover bg-center" style={{ backgroundImage: "url('/about-img/about1.jpeg')" }} />
-          <Card customClass="shadow-2xl rounded-2xl bg-cover bg-center" style={{ backgroundImage: "url('/about-img/about2.jpeg')" }} />
-          <Card customClass="shadow-2xl rounded-2xl bg-cover bg-center" style={{ backgroundImage: "url('/about-img/about6.jpeg')" }} />
-          <Card customClass="shadow-2xl rounded-2xl bg-cover bg-center" style={{ backgroundImage: "url('/about-img/about4.jpeg')" }} />
+          <Card customClass="shadow-2xl rounded-2xl bg-cover bg-center" style={{ backgroundImage: "url('/wedd-img/wedding3.jfif')" }} />
+          <Card customClass="shadow-2xl rounded-2xl bg-cover bg-center" style={{ backgroundImage: "url('/product-img/pro6.jfif')" }} />
+          <Card customClass="shadow-2xl rounded-2xl bg-cover bg-center" style={{ backgroundImage: "url('/port-img/port2.jpg')" }} />
+          <Card customClass="shadow-2xl rounded-2xl bg-cover bg-center" style={{ backgroundImage: "url('/event-img/wedd-event7.jfif')" }} />
         </CardSwap>
       </div>
     </div>

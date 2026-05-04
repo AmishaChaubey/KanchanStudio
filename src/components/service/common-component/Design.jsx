@@ -4,12 +4,11 @@ const GalleryCard = ({ item, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const handleScroll = () => setOffsetY(window.scrollY * 0.5);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   const getSizeClass = () => {
     switch (item.size) {
